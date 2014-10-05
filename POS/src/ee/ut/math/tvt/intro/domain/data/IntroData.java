@@ -6,6 +6,8 @@ public class IntroData {
 	
 	private String softwareVersion;
 	
+	private String logoImage;
+	
 	public Team getTeam() {
 		return team;
 	}
@@ -20,6 +22,14 @@ public class IntroData {
 	
 	public void setSoftwareVersion(String softwareVersion) {
 		this.softwareVersion = softwareVersion;
+	}
+
+	public String getLogoImage() {
+		return logoImage;
+	}
+
+	public void setLogoImage(String logoImage) {
+		this.logoImage = logoImage;
 	}
 
 }

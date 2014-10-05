@@ -1,32 +1,40 @@
 package ee.ut.math.tvt.intro.domain.controller.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
 import ee.ut.math.tvt.intro.domain.data.IntroData;
 import ee.ut.math.tvt.intro.domain.data.Team;
+import ee.ut.math.tvt.intro.enums.ApplicationProperties;
+import ee.ut.math.tvt.intro.enums.VersionProperties;
 
 public class IntroDomainControllerImpl implements IntroDomainController{
 
 	@Override
-	public IntroData getIntroData() { //TODO get values from property files
+	public IntroData getIntroData() {
 		IntroData introData = new IntroData();
-		Team team = new Team();
-		team.setLeader("Stenno");
-		team.setLeaderEmail("stenno@abc.ee");
-		team.setMembers(getMembers());
-		introData.setTeam(team);
-		introData.setSoftwareVersion("v_0.0.1");
+		introData.setSoftwareVersion(getVerion());
+		introData.setLogoImage(getLogoImage());
+		introData.setTeam(getTeam());
 		return introData ;
 	}
 
-	private List<String> getMembers() {
-		List<String> members = new ArrayList<String>();
-		for (int i = 0; i < 3; i++) {
-			members.add("average member nr " + i);
-		}
-		return members;
+
+	private Team getTeam() {
+		Team team = new Team();
+		team.setLeader(ApplicationProperties.TEAM_LEADER.getValue());
+		team.setLeaderEmail(ApplicationProperties.TEAM_LEADER_EMAIL.getValue());
+		team.setMembers(ApplicationProperties.TEAM_MEMBERS.getValue());
+		return team;
+	}
+	
+	private String getLogoImage(){
+		return ApplicationProperties.LOGO_IMAGE.getValue();
+	}
+	
+	private String getVerion(){
+		String arg1 = VersionProperties.BUILD_MAJOR_NUMBER.getValue();
+		String arg2 = VersionProperties.BUILD_MINOR_NUMBER.getValue();;
+		String arg3 = VersionProperties.BUILD_REVISION_NUMBER.getValue();;
+		return String.format("%s.%s.%s", arg1, arg2, arg3);
 	}
 
 }

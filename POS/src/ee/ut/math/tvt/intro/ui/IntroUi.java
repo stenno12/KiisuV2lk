@@ -4,16 +4,23 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import javax.swing.JButton;
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import com.sun.java.swing.plaf.gtk.GTKLookAndFeel;
 
+import ee.ut.math.tvt.intro.Intro;
 import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
 import ee.ut.math.tvt.intro.ui.model.IntroModel;
 
@@ -41,15 +48,32 @@ public class IntroUi extends JFrame {
 		setTitle("Intro");
 
 		// set L&F to the nice Windows style
-		try {
+//		try {
 //			UIManager.setLookAndFeel(new WindowsLookAndFeel());
-			UIManager.setLookAndFeel(new GTKLookAndFeel());
+//			UIManager.setLookAndFeel(new GTKLookAndFeel());
 
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace(); // TODO should be logged
+//		} catch (UnsupportedLookAndFeelException e) {
+//			e.printStackTrace(); // TODO should be logged
+//		}
+		JPanel panel = new JPanel();
+		
+		JLabel introText = new JLabel(model.getIntroText());
+		panel.add(introText);
+		JLabel version = new JLabel(model.getSoftwareVersion());
+		panel.add(version);
+		
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File(this.getClass().getClassLoader().getResource(model.getLogoImage()).getFile()));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setSize(50, 50);
+			panel.add(picLabel);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace(); //TODO should be logged
+		} catch (IOException e2) {
+			e2.printStackTrace(); //TODO should be logged
 		}
-
-		drawWidgets();
+		getContentPane().add(panel);
 
 		// size & location
 		int width = 600;
@@ -64,11 +88,6 @@ public class IntroUi extends JFrame {
 				System.exit(0);
 			}
 		});
-	}
-
-	private void drawWidgets() {
-		JLabel leadNameAndSoftwareVersion = new JLabel(model.getLeadName() + " " + model.getSoftwareVersion());
-		getContentPane().add(leadNameAndSoftwareVersion);
 	}
 
 }

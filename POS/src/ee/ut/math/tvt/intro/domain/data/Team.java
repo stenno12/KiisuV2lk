@@ -1,6 +1,5 @@
 package ee.ut.math.tvt.intro.domain.data;
 
-import java.util.List;
 
 public class Team {
 	
@@ -8,9 +7,7 @@ public class Team {
 	
 	private String leaderEmail;
 	
-	private List<String> members;
-	
-	private String logo;
+	private String members;
 	
 	public String getLeader() {
 		return leader;
@@ -28,20 +25,12 @@ public class Team {
 		this.leaderEmail = leaderEmail;
 	}
 	
-	public List<String> getMembers() {
+	public String getMembers() {
 		return members;
 	}
 	
-	public void setMembers(List<String> members) {
+	public void setMembers(String members) {
 		this.members = members;
-	}
-	
-	public String getLogo() {
-		return logo;
-	}
-	
-	public void setLogo(String logo) {
-		this.logo = logo;
 	}
 
 }
