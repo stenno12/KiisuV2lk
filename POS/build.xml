@@ -9,7 +9,8 @@
 	<property name="src.dir" value="${basedir}/src"/>
 
 	<propertyfile file="${src.dir}/application.properties" />
-	<propertyfile file= "${src.dir}/version.properties"/>
+	<propertyfile file= "${src.dir}/version.properties" />
+	   
 
 	
 
@@ -73,10 +74,14 @@
 	<!-- Create the jar file -->
 	<target name="dist" depends="build" description="create the jar file">
 		<mkdir dir="${build.jar.dir}"/>
-		
+		<propertyfile file= "${src.dir}/version.properties">
+	    <entry key="build.revision.number" type="int" 
+     	operation="+" 
+     	default="1" />
+	    </propertyfile>
+	    
 		<jar destfile="${build.jar.dir}/kiisuv2lk.jar" 
 		    basedir="${build.classes.dir}"
-		    
 		    />
 		
 	</target>
