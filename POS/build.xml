@@ -78,6 +78,8 @@
 	<!-- Create the jar file -->
 	<target name="dist" depends="build" description="create the jar file">
 		<mkdir dir="${build.jar.dir}"/>
+		
+		<!-- suurenda revision numbrit jar faili loomisel -->
 		<propertyfile file= "${src.dir}/version.properties">
 	    <entry key="build.revision.number" type="int" 
      	operation="+" 

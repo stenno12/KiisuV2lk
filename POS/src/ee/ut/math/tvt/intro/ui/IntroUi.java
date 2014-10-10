@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 
 
 import ee.ut.math.tvt.intro.Intro;
@@ -62,8 +64,10 @@ public class IntroUi extends JFrame {
 		panel.add(version);
 		
 		BufferedImage myPicture;
+		URL url;
 		try {
-			myPicture = ImageIO.read(new File(this.getClass().getClassLoader().getResource(model.getLogoImage()).getFile()));
+			url = this.getClass().getClassLoader().getResource(model.getLogoImage());
+			myPicture = ImageIO.read(url);
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 			picLabel.setSize(50, 50);
 			panel.add(picLabel);
