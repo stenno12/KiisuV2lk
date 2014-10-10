@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+
 import ee.ut.math.tvt.intro.Intro;
 import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
 import ee.ut.math.tvt.intro.ui.model.IntroModel;
