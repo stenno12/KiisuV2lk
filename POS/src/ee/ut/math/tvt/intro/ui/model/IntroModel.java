@@ -14,12 +14,12 @@ public class IntroModel {
 	public IntroModel(IntroDomainController introController) {
 		IntroData introData = introController.getIntroData();
 		softwareVersion = introData.getSoftwareVersion();
-		//logoImage = introData.getLogoImage();
+		logoImage = introData.getLogoImage();
 		Team team = introData.getTeam();
 		introText = team.getLeader() + ", " + team.getLeaderEmail() + ", "
 				+ team.getMembers();
 	}
-	/*
+
 	public String getLogoImage() {
 		return logoImage;
 	}
@@ -27,7 +27,7 @@ public class IntroModel {
 	public void setLogoImage(String logoImage) {
 		this.logoImage = logoImage;
 	}
-	*/
+
 	public String getIntroText() {
 		return introText;
 	}

@@ -62,10 +62,16 @@ public class IntroUi extends JFrame {
 		panel.add(version);
 		
 		BufferedImage myPicture;
-		//myPicture = ImageIO.read(new File(this.getClass().getClassLoader().getResource(model.getLogoImage()).getFile()));
-		//JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-		//picLabel.setSize(50, 50);
-		//panel.add(picLabel);
+		try {
+			myPicture = ImageIO.read(new File(this.getClass().getClassLoader().getResource(model.getLogoImage()).getFile()));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setSize(50, 50);
+			panel.add(picLabel);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace(); //TODO should be logged
+		} catch (IOException e2) {
+			e2.printStackTrace(); //TODO should be logged
+		}
 		getContentPane().add(panel);
 
 		// size & location
