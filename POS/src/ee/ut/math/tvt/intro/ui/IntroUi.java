@@ -79,7 +79,7 @@ public class IntroUi extends JFrame {
 		getContentPane().add(panel);
 
 		// size & location
-		int width = 600;
+		int width = 650;
 		int height = 400;
 		setSize(width, height);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
