@@ -86,9 +86,11 @@
      	default="1" />
 	    </propertyfile>
 	    
-		<jar destfile="${build.jar.dir}/kiisuv2lk.jar" 
-		    basedir="${build.classes.dir}"
-		    />
+		<jar destfile="${build.jar.dir}/kiisuv2lk.jar" basedir="${build.classes.dir}" >
+			
+			<zipgroupfileset dir="lib" includes="*.jar"/>
+			
+		</jar>
 		
 	</target>
 	
