@@ -89,6 +89,9 @@
 		<jar destfile="${build.jar.dir}/kiisuv2lk.jar" basedir="${build.classes.dir}" >
 			
 			<zipgroupfileset dir="lib" includes="*.jar"/>
+			<manifest>
+			        <attribute name="Main-Class" value="ee.ut.math.tvt.intro.Intro"/>
+			</manifest>
 			
 		</jar>
 		
