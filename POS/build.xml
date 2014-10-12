@@ -10,7 +10,7 @@
 
 	<propertyfile file="${src.dir}/application.properties" />
 	<propertyfile file= "${src.dir}/version.properties" />
-	 
+	<propertyfile file= "${src.dir}/log4j.properties" />
 	
 
 	
@@ -53,7 +53,7 @@
 		<copy file="${src.dir}/application.properties" todir="${build.classes.dir}"/>
 		<copy file="${src.dir}/version.properties" todir="${build.classes.dir}"/> 
 		<copy file="${src.dir}/catflash.jpg" todir="${build.classes.dir}"/>
-		
+		<copy file="${src.dir}/log4j.properties" todir="${build.classes.dir}"/>
      
 		<javac
             srcdir="${src.dir}"
