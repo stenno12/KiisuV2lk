@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.intro.service.impl;
+package ee.ut.math.tvt.kiisuv2lk.service.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
-import ee.ut.math.tvt.intro.service.PropertiesLoader;
+import ee.ut.math.tvt.kiisuv2lk.service.PropertiesLoader;
 /*
  * this load again if file changed is just for fun
  * don't know if holding 2 Properties object and cheking file last modified

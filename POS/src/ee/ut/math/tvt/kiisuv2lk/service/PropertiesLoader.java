@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.intro.service;
+package ee.ut.math.tvt.kiisuv2lk.service;
 
 import java.util.Properties;
 

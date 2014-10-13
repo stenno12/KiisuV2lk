@@ -1,8 +1,8 @@
-package ee.ut.math.tvt.intro.ui.model;
+package ee.ut.math.tvt.kiisuv2lk.ui.model;
 
-import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
-import ee.ut.math.tvt.intro.domain.data.IntroData;
-import ee.ut.math.tvt.intro.domain.data.Team;
+import ee.ut.math.tvt.kiisuv2lk.domain.controller.IntroDomainController;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.IntroData;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.Team;
 
 public class IntroModel {
 
