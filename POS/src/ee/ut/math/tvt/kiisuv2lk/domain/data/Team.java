@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.intro.domain.data;
+package ee.ut.math.tvt.kiisuv2lk.domain.data;
 
 
 public class Team {

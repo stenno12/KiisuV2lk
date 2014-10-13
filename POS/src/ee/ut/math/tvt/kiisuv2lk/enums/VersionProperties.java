@@ -1,7 +1,7 @@
-package ee.ut.math.tvt.intro.enums;
+package ee.ut.math.tvt.kiisuv2lk.enums;
 
-import ee.ut.math.tvt.intro.service.PropertiesLoader;
-import ee.ut.math.tvt.intro.service.impl.PropertiesLoaderImpl;
+import ee.ut.math.tvt.kiisuv2lk.service.PropertiesLoader;
+import ee.ut.math.tvt.kiisuv2lk.service.impl.PropertiesLoaderImpl;
 
 public enum VersionProperties {
 

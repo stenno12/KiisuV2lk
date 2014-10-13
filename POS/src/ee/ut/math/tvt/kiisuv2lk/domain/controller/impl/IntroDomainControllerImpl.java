@@ -1,10 +1,10 @@
-package ee.ut.math.tvt.intro.domain.controller.impl;
+package ee.ut.math.tvt.kiisuv2lk.domain.controller.impl;
 
-import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
-import ee.ut.math.tvt.intro.domain.data.IntroData;
-import ee.ut.math.tvt.intro.domain.data.Team;
-import ee.ut.math.tvt.intro.enums.ApplicationProperties;
-import ee.ut.math.tvt.intro.enums.VersionProperties;
+import ee.ut.math.tvt.kiisuv2lk.domain.controller.IntroDomainController;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.IntroData;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.Team;
+import ee.ut.math.tvt.kiisuv2lk.enums.ApplicationProperties;
+import ee.ut.math.tvt.kiisuv2lk.enums.VersionProperties;
 
 public class IntroDomainControllerImpl implements IntroDomainController{
 

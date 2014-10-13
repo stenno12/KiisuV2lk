@@ -1,4 +1,4 @@
-package ee.ut.math.tvt.intro.ui;
+package ee.ut.math.tvt.kiisuv2lk.ui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -21,9 +21,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 
 
-import ee.ut.math.tvt.intro.Intro;
-import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
-import ee.ut.math.tvt.intro.ui.model.IntroModel;
+
+
+import ee.ut.math.tvt.kiisuv2lk.Intro;
+import ee.ut.math.tvt.kiisuv2lk.domain.controller.IntroDomainController;
+import ee.ut.math.tvt.kiisuv2lk.ui.model.IntroModel;
 
 /**
  * Graphical user interface of the sales system.

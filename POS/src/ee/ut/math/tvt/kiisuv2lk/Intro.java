@@ -1,10 +1,10 @@
-package ee.ut.math.tvt.intro;
+package ee.ut.math.tvt.kiisuv2lk;
 
 import org.apache.log4j.Logger;
 
-import ee.ut.math.tvt.intro.domain.controller.IntroDomainController;
-import ee.ut.math.tvt.intro.domain.controller.impl.IntroDomainControllerImpl;
-import ee.ut.math.tvt.intro.ui.IntroUi;
+import ee.ut.math.tvt.kiisuv2lk.domain.controller.IntroDomainController;
+import ee.ut.math.tvt.kiisuv2lk.domain.controller.impl.IntroDomainControllerImpl;
+import ee.ut.math.tvt.kiisuv2lk.ui.IntroUi;
 
 
 public class Intro {
