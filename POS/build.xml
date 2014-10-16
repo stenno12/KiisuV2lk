@@ -103,5 +103,11 @@
 	    	<classpath refid="jrun.classpath"/>
 		</java> 
 	</target>
+	
+	<target name="runc" depends="build" description="Run the application (console)">
+		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath" fork="yes">
+			<arg value="console" />
+		</java>
+	</target>
 
 </project>
