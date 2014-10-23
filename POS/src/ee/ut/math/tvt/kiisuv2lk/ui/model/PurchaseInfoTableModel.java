@@ -1,8 +1,11 @@
 package ee.ut.math.tvt.kiisuv2lk.ui.model;
 
+import java.util.NoSuchElementException;
+
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.ui.SalesSystemUI;
 
 /**
@@ -57,14 +60,28 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
     /**
      * Add new StockItem to table.
      */
-    public void addItem(final SoldItem item) {
+    public void addItem(final SoldItem solditem) {
         /**
          * XXX In case such stockItem already exists increase the quantity of the
          * existing stock.
          */
+    	
+    	try {
+			SoldItem item = getItemById(solditem.getId());
+			item.setQuantity(item.getQuantity() + solditem.getQuantity());
+			log.debug("Found existing item " + solditem.getName()
+					+ " increased quantity by " + solditem.getQuantity());
+		}
+		catch (NoSuchElementException e) {
+			rows.add(solditem);
+			log.debug("Added " + solditem.getName()
+					+ " quantity of " + solditem.getQuantity());
+		}
+		fireTableDataChanged();
+		System.out.println(toString());
         
-        rows.add(item);
-        log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
-        fireTableDataChanged();
+//        rows.add(item);
+//        log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
+//        fireTableDataChanged();
     }
 }

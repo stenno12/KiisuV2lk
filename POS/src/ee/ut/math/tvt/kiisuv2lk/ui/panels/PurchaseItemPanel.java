@@ -17,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -168,12 +169,25 @@ public class PurchaseItemPanel extends JPanel {
         if (stockItem != null) {
             int quantity;
             try {
-                quantity = Integer.parseInt(quantityField.getText());
-            } catch (NumberFormatException ex) {
-                quantity = 1;
-            }
-            model.getCurrentPurchaseTableModel()
-                .addItem(new SoldItem(stockItem, quantity));
+                	quantity = Integer.parseInt(quantityField.getText());
+            	} catch (NumberFormatException ex) {
+            		quantity = 1;
+            	}
+            	//Do only if there is enough stock
+            	long id = stockItem.getId();
+            	int basketItemQuantity; 
+            	try {
+            		basketItemQuantity = model.getCurrentPurchaseTableModel()
+    				.getItemById(id).getQuantity();
+            	} catch (NoSuchElementException e){
+            		basketItemQuantity = 0;
+            	}
+            	if(basketItemQuantity + quantity <= stockItem.getQuantity()){
+            		model.getCurrentPurchaseTableModel()
+            		.addItem(new SoldItem(stockItem, quantity));
+            	} else {
+            		JOptionPane.showMessageDialog(null, "Not enough items in stock!");
+            	}
         }
     }
 
