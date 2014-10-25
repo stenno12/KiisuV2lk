@@ -3,6 +3,7 @@ package ee.ut.math.tvt.kiisuv2lk.ui.tabs;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.kiisuv2lk.ui.panels.PurchaseItemPanel;
+import ee.ut.math.tvt.kiisuv2lk.ui.windows.SaleWindow;
 import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
 
 import java.awt.Color;
@@ -168,17 +169,20 @@ public class PurchaseTab {
 
   /** Event handler for the <code>submit purchase</code> event. */
   protected void submitPurchaseButtonClicked() {
-    log.info("Sale complete");
+//    log.info("Sale complete");
     try {
       log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
       domainController.submitCurrentPurchase(
           model.getCurrentPurchaseTableModel().getTableRows()
       );
-      endSale();
-      model.getCurrentPurchaseTableModel().clear();
+      
+      SaleWindow wdw = new SaleWindow(model);
+      wdw.setVisible(true);
+//      model.getCurrentPurchaseTableModel().clear();
     } catch (VerificationFailedException e1) {
       log.error(e1.getMessage());
     }
+//    endSale();
   }
 
 
