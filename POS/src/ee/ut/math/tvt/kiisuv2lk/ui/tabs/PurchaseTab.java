@@ -183,7 +183,7 @@ public class PurchaseTab {
           model.getCurrentPurchaseTableModel().getTableRows()
       );
       
-      SaleWindow wdw = new SaleWindow(model);
+      SaleWindow wdw = new SaleWindow(model, domainController);
       wdw.setVisible(true);
 //      model.getCurrentPurchaseTableModel().clear();
     } catch (VerificationFailedException e1) {
