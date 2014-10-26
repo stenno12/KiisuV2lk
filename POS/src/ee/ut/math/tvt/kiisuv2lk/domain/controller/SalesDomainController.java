@@ -48,7 +48,11 @@ public interface SalesDomainController {
      */
     public void submitCurrentPurchase(List<SoldItem> goods)
             throws VerificationFailedException;
-    
+
+
+
+	public void saveHistoryState(List<SoldItem> tableRows);
+
 
     
 }
