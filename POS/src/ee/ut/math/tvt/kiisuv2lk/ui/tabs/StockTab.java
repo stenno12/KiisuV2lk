@@ -1,11 +1,14 @@
 package ee.ut.math.tvt.kiisuv2lk.ui.tabs;
 
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.kiisuv2lk.ui.windows.AddToStockWindow;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -68,9 +71,23 @@ public class StockTab {
     panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     return panel;
   }
+  
+  
 
 
-  // table of the wareshouse stock
+  private JButton createNewAddButton() {
+	    JButton b = new JButton("Add");
+	    b.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent e) {
+	        AddToStockWindow newWin= new AddToStockWindow(model);
+	        newWin.setVisible(true);
+	      }
+	    });
+
+	    return b;
+}
+
+// table of the wareshouse stock
   private Component drawStockMainPane() {
     JPanel panel = new JPanel();
 
