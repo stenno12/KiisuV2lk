@@ -2,9 +2,11 @@ package ee.ut.math.tvt.kiisuv2lk.domain.controller;
 
 import java.util.List;
 
+import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
+import ee.ut.math.tvt.kiisuv2lk.ui.model.PurchaseInfoTableModel;
 
 /**
  * Sales domain controller is responsible for the domain specific business
@@ -19,7 +21,9 @@ public interface SalesDomainController {
      *         ee.ut.math.tvt.salessystem.domain.data.StockItem}s.
      */
     public List<StockItem> loadWarehouseState();
-
+    
+    
+    public List<HistoryItem> loadHistoryState();
     // business processes
     /**
      * Initiate new business transaction - purchase of the goods.

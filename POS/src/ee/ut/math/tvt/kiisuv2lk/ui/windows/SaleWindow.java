@@ -9,7 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import org.apache.log4j.Logger;
+
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.kiisuv2lk.ui.tabs.PurchaseTab;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,7 +20,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.VetoableChangeListener;
+
+import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 
 public class SaleWindow extends JFrame {
 	
@@ -28,8 +34,9 @@ public class SaleWindow extends JFrame {
 //	}
 	
 	private double sum = 0;
+	private static final Logger log = Logger.getLogger(PurchaseTab.class);
 	
-	public SaleWindow(SalesSystemModel model) {
+	public SaleWindow(final SalesSystemModel model, final SalesDomainController domainController) {
 	
 	setSize(300, 300); // 
     setLocation(100, 100); // 
@@ -57,8 +64,20 @@ public class SaleWindow extends JFrame {
     		try{
     		if (Double.parseDouble(payField.getText())>= sum){
     			System.out.println("yay");
+				
+    			try {
+					domainController.submitCurrentPurchase(
+					          model.getCurrentPurchaseTableModel().getTableRows()
+					      );
+				} catch (VerificationFailedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			domainController.saveHistoryState(model.getCurrentPurchaseTableModel().getTableRows());
+    			
+    			
     		}else{
-    			System.out.println("Not enough money!");
+    			System.out.println("Not enough money! Go be poor somewhere else");
     		}
     		dispose();
     		model.getCurrentPurchaseTableModel().clear();
@@ -106,5 +125,6 @@ public class SaleWindow extends JFrame {
     
     
 	}
+
 
 }

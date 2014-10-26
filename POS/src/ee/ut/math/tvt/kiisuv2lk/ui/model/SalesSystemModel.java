@@ -11,6 +11,9 @@ public class SalesSystemModel {
     
     private static final Logger log = Logger.getLogger(SalesSystemModel.class);
 
+    //History model 
+    private HistoryTableModel histoyTableModel;
+    
     // Warehouse model
     private StockTableModel warehouseTableModel;
     
@@ -26,14 +29,22 @@ public class SalesSystemModel {
     public SalesSystemModel(SalesDomainController domainController) {
         this.domainController = domainController;
         
+        
+        histoyTableModel= new HistoryTableModel();
         warehouseTableModel = new StockTableModel();
         currentPurchaseTableModel = new PurchaseInfoTableModel();
 
         // populate stock model with data from the warehouse
         warehouseTableModel.populateWithData(domainController.loadWarehouseState());
+        // populate history model with data from history
+        histoyTableModel.populateWithData(domainController.loadHistoryState());
 
     }
-
+    
+    public HistoryTableModel getHistorytableModel() {
+        return histoyTableModel;
+    }
+    
     public StockTableModel getWarehouseTableModel() {
         return warehouseTableModel;
     }

@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
+import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
@@ -26,12 +27,13 @@ public class ConsoleUI {
 	private List<StockItem> cart;
 
 	private List<StockItem> warehouse;
-
+	private List<HistoryItem> history;
 	public ConsoleUI(SalesDomainController domainController) {
 		this.dc = domainController;
 
 		cart = new ArrayList<StockItem>();
 		warehouse = new ArrayList<StockItem>();
+		history= new ArrayList<HistoryItem>();
 	}
 
 	/**
@@ -41,7 +43,7 @@ public class ConsoleUI {
 		try {
 			// populate warehouse with goodies
 			populateWarehouse();
-
+			
 			System.out.println("===========================");
 			System.out.println("=       Sales System      =");
 			System.out.println("===========================");
@@ -64,7 +66,9 @@ public class ConsoleUI {
 	private void populateWarehouse() {
 		warehouse = dc.loadWarehouseState();
 	}
-
+	private void populateHistoy() {
+		history = dc.loadHistoryState();
+	}
 	private void showStock(List<StockItem> stock) {
 		System.out.println("-------------------------");
 		for (StockItem si : stock) {

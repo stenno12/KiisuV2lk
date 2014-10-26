@@ -1,17 +1,26 @@
 package ee.ut.math.tvt.kiisuv2lk.domain.controller.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
 
+
 /**
  * Implementation of the sales domain controller.
  */
 public class SalesDomainControllerImpl implements SalesDomainController {
+	// simulatin database for history items
+	List<HistoryItem> historydataset = new ArrayList<HistoryItem>();
+	
 	
 	public void submitCurrentPurchase(List<SoldItem> goods) throws VerificationFailedException {
 		// Let's assume we have checked and found out that the buyer is underaged and
@@ -46,5 +55,34 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		return dataset;
 	}
 
+	
+	public List<HistoryItem> loadHistoryState() {
+		StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0, 5);
+		StockItem frankfurters = new StockItem(3l, "Frankfurters", "Beer sauseges", 15.0, 12);
+		SoldItem sold =new SoldItem(chips, 1);
+		SoldItem sold2 =new SoldItem(frankfurters, 2);
+		List<SoldItem> listsold=new ArrayList<SoldItem>();
+		listsold.add(sold);
+		
+		HistoryItem newElem= new HistoryItem(listsold, "Oct 26 2014","18:58:41");
+		historydataset.add(newElem);
+		
+		listsold.add(sold2);
+		HistoryItem newElem2= new HistoryItem(listsold, "Oct 26 2014","18:58:41");
+		
+		historydataset.add(newElem2);
+		return historydataset;
+	}
+	//save historyitem to history database (simulated)
+
+	@Override
+	public void saveHistoryState(List<SoldItem> goods){
+        Date date = new Date();
+        String[] parts = date.toString().split(" ");
+        
+		HistoryItem newElem= new HistoryItem(goods, parts[1]+" "+parts[2]+" "+parts[5], parts[4]);
+		historydataset.add(newElem);
+		
+	}
 
 }

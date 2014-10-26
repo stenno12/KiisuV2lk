@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.kiisuv2lk.ui.tabs;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
+import ee.ut.math.tvt.kiisuv2lk.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.kiisuv2lk.ui.panels.PurchaseItemPanel;
 import ee.ut.math.tvt.kiisuv2lk.ui.windows.SaleWindow;
@@ -111,7 +112,12 @@ public class PurchaseTab {
     JButton b = new JButton("Confirm");
     b.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        submitPurchaseButtonClicked();
+        try {
+			submitPurchaseButtonClicked();
+		} catch (VerificationFailedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
       }
     });
     b.setEnabled(false);
@@ -167,8 +173,9 @@ public class PurchaseTab {
   }
 
 
-  /** Event handler for the <code>submit purchase</code> event. */
-  protected void submitPurchaseButtonClicked() {
+  /** Event handler for the <code>submit purchase</code> event. 
+ * @throws VerificationFailedException */
+  protected void submitPurchaseButtonClicked() throws VerificationFailedException {
 //    log.info("Sale complete");
     try {
       log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
