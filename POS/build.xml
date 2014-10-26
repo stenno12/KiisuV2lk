@@ -112,5 +112,79 @@
 	          <jvmarg value="-Xdebug" />
 	          <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 	        </java>
+	
+	
+	<!-- macro for git -->
+	<macrodef name="git">
+		<attribute name="command"/>
+		<attribute  name="dir" default=""/>
+		<element name="args" optional="true" />
+		<sequential>
+				<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
+	
+	<!-- Commits and pushes changes to GitHub server -->
+	<target name="git_commit" description="Commits and pushes changes to GitHub">
+		<input message="Commit message"
+				addproperty="commit" />
+		<input message="Username"
+				addproperty="usernm" />
+		<input message="Password"
+				addproperty="passwd" />
+		
+		<echo message="Commiting changes..." />
+		
+		<git command="add">
+			<args>
+				<arg value="-A"/>
+			</args>
+		</git>
+		
+		<git command="add">
+				<args>
+					<arg value="-m ${message}"/>
+				</args>
+		</git>
+		
+		<git command="push">
+				<args>
+					<arg value="https://${usernm}:${passwd}@github.com/stenno12/KiisuV2lk.git"/>
+				</args>
+		</git>
+		
+		</target>
+	
+	<!--  Creating a tag and synchronize it with the GitHub  -->
+	<target name="git_tag" description="Create and push tag">
+		<input message="Tag name"
+				addproperty="tag" />
+		<input message="Commit message"
+				addproperty="commit" />
+		<input message="Username"
+				addproperty="usernm" />
+		<input message="Password"
+				addproperty="passwd" />
+		
+		<echo message="Creating tag..." />
+		
+		<git command="tag">
+			<args>
+				<arg value="-a ${tag} -m ${commit}"/>
+			</args>
+		</git>
+		
+		<git command="push">
+				<args>
+					<arg value="--tags"/>
+					<arg value="https://${usernm}:${passwd}@github.com/stenno12/KiisuV2lk.git"/>
+				</args>
+		</git>
+		
+		</target>
+	
 
 </project>
