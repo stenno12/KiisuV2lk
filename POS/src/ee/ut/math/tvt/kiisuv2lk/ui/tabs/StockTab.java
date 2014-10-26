@@ -63,7 +63,7 @@ public class StockTab {
     gc.anchor = GridBagConstraints.NORTHWEST;
     gc.weightx = 0;
 
-    addItem = new JButton("Add");
+    addItem = createNewAddButton();
     gc.gridwidth = GridBagConstraints.RELATIVE;
     gc.weightx = 1.0;
     panel.add(addItem, gc);
