@@ -32,14 +32,13 @@ public class HistoryItemDetailsWindow extends JFrame{
 	public HistoryItemDetailsWindow(SalesSystemModel model,HistoryItem HItem) {
 		this.model=model;
 		this.HItem=HItem;
-		setSize(200, 600);
+		setSize(500, 500);
 	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	    setLocation((screen.width - 200) / 2, (screen.height - 300) / 2); 
 	    
 	    Container cont = getContentPane();
 	    cont.setLayout(new FlowLayout());
 	    cont.add(getPane());
-	    
 	    pack();
 	    
 	}
@@ -91,25 +90,39 @@ public class HistoryItemDetailsWindow extends JFrame{
 	// table of HistoryItem
     private Component drawHistoryDetailMainPane() {
       JPanel panel = new JPanel();
-
+      /*
       final JTable table = new JTable(model.getHistoryItemDetailTableModel());
 
       JTableHeader header = table.getTableHeader();
       header.setReorderingAllowed(false);
 
      JScrollPane scrollPane = new JScrollPane(table);
-     /*
-      for(int i=0;i<HItem.getAmountOfELements();i++){
-    	  SoldItem soldI=HItem.getSoldItems().get(i);
-    	  //JLabel id
-      }
-      */
-      
+     */
       GridBagConstraints gc = new GridBagConstraints();
       GridBagLayout gb = new GridBagLayout();
       gc.fill = GridBagConstraints.BOTH;
       gc.weightx = 1.0;
       gc.weighty = 1.0;
+
+      for(int i=0;i<HItem.getAmountOfELements();i++){
+    	  SoldItem soldI=HItem.getSoldItems().get(i);
+    	  
+    	  JLabel id =new JLabel(soldI.getId().toString());
+    	  JLabel name =new JLabel(soldI.getName().toString());
+    	  JLabel price =new JLabel(String.valueOf(soldI.getPrice()));
+    	  JLabel quantity =new JLabel(String.valueOf(soldI.getQuantity()));
+    	  JLabel sum =new JLabel(String.valueOf(soldI.getSum()));
+    	  
+    	  panel.add(id,gc);
+    	  panel.add(name,gc);
+    	  panel.add(price,gc);
+    	  panel.add(quantity,gc);
+    	  panel.add(sum,gc);
+    	  
+      }
+      
+      
+ 
 
       panel.setLayout(gb);
       //panel.add(scrollPane, gc);
