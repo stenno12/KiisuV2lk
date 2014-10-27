@@ -1,9 +1,11 @@
 package ee.ut.math.tvt.kiisuv2lk.ui.model;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
+import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 
 /**
@@ -52,6 +54,22 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		}
 		fireTableDataChanged();
 	}
+	public boolean removeItems(List<SoldItem> itemlist) {
+		boolean done=true;
+		for(int i=0;i<itemlist.size();i++){
+			StockItem item =getItemById(itemlist.get(i).getId());
+			int removeamount=itemlist.get(i).getQuantity();
+			if(item.getQuantity()>=removeamount){
+				item.setQuantity(item.getQuantity() - removeamount);
+				System.out.println("Eemoved "+ removeamount+" "+ item.getName()+" from warehouse");
+			}else{
+				System.out.println("Warehouse does not have enough items");
+				done=false;
+			}
+		}
+		return done;
+		
+	}
 
 	@Override
 	public String toString() {
@@ -71,5 +89,6 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 
 		return buffer.toString();
 	}
+
 
 }

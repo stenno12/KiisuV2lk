@@ -65,10 +65,10 @@ public class SaleWindow extends JFrame {
     	public void actionPerformed(ActionEvent e) {
     		try{
     		if (Double.parseDouble(payField.getText())>= sum){
-    			System.out.println("yay");
-				
+    			System.out.println("Sale confirmed");
     			try {
 					domainController.submitCurrentPurchase(model.getCurrentPurchaseTableModel().getTableRows());
+					model.getWarehouseTableModel().removeItems(model.getCurrentPurchaseTableModel().getTableRows());
 					parentTab.endSale();
 				} catch (VerificationFailedException e1) {
 					// TODO Auto-generated catch block
