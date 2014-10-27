@@ -32,7 +32,7 @@ public class SalesSystemModel {
     public SalesSystemModel(SalesDomainController domainController) {
         this.domainController = domainController;
         
-        
+        historydetailtablemodel = new HistoryItemDetailTableModel();
         histoyTableModel= new HistoryTableModel();
         warehouseTableModel = new StockTableModel();
         currentPurchaseTableModel = new PurchaseInfoTableModel();
@@ -41,7 +41,7 @@ public class SalesSystemModel {
         warehouseTableModel.populateWithData(domainController.loadWarehouseState());
         // populate history model with data from history
         histoyTableModel.populateWithData(domainController.loadHistoryState());
-       // historydetailtablemodel.populateWithData(domainController.loadDetailedHistoryState());
+        //historydetailtablemodel.populateWithData(domainController.loadDetailedDeatailHistoryState());
     }
     
     public HistoryTableModel getHistorytableModel() {

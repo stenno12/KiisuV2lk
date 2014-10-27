@@ -82,6 +82,9 @@ public class SalesDomainControllerImpl implements SalesDomainController {
         Long id= (long) historydataset.size();
 		HistoryItem newElem= new HistoryItem(goods, parts[1]+" "+parts[2]+" "+parts[5], parts[4],id);
 		historydataset.add(newElem);
+		//model.getCurrentPurchaseTableModel().addItem(newElem);
+		
+		
 		
 		System.out.println("Now elements in history: "+ historydataset.size() );
 	}
@@ -90,6 +93,20 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	public List<SoldItem> loadDetailedHistoryState() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<HistoryItem> loadDetailedDeatailHistoryState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<HistoryItem> getHistorydataset() {
+		return historydataset;
+	}
+
+	public void setHistorydataset(List<HistoryItem> historydataset) {
+		this.historydataset = historydataset;
 	}
 
 }

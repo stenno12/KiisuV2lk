@@ -7,6 +7,7 @@ import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.PurchaseInfoTableModel;
+import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 
 /**
  * Sales domain controller is responsible for the domain specific business
@@ -53,6 +54,12 @@ public interface SalesDomainController {
 
 
 	public void saveHistoryState(List<SoldItem> tableRows);
+
+
+	public List<HistoryItem> loadDetailedDeatailHistoryState();
+
+
+	
 
 
     

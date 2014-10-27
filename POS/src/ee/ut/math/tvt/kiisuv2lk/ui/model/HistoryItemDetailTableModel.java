@@ -29,7 +29,7 @@ public class HistoryItemDetailTableModel extends SalesSystemTableModel<HistoryIt
 	private static final Logger log = Logger.getLogger(PurchaseInfoTableModel.class);
 	private SalesSystemModel model;
 
-	public HistoryItemDetailTableModel(SalesSystemModel model) {
+	public HistoryItemDetailTableModel() {
 		super(new String[] { "Name", "Price", "Quantity", "Sum"});
 	}
 	
@@ -41,7 +41,7 @@ public class HistoryItemDetailTableModel extends SalesSystemTableModel<HistoryIt
 		int i=0;
 			switch (columnIndex) {
 			case 0:
-				return SI.get(i).getName();
+				return item.getSoldItems();
 			case 1:
 				return SI.get(i).getPrice();
 			case 2:
@@ -52,6 +52,15 @@ public class HistoryItemDetailTableModel extends SalesSystemTableModel<HistoryIt
 			throw new IllegalArgumentException("Column index out of range");
 			}
 		//}
+
+
+	
+	public void addItem(final HistoryItem HI) {
+		rows.add(HI);
+		fireTableDataChanged() ;
+	
+	
+}
 		
 }
 	

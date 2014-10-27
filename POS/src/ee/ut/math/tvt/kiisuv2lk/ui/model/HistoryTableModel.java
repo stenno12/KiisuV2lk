@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 
 /**
  * History table model.
@@ -33,6 +35,12 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 		}
 		throw new IllegalArgumentException("Column index out of range");
 	}
+	 public void addItem(final HistoryItem HI) {
+		 rows.add(HI);
+		 fireTableDataChanged();
+	 }
+	 
+	
 
 
 }
