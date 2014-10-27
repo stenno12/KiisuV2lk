@@ -183,7 +183,7 @@ public class PurchaseTab {
           model.getCurrentPurchaseTableModel().getTableRows()
       );
       
-      SaleWindow wdw = new SaleWindow(model, domainController);
+      SaleWindow wdw = new SaleWindow(model, domainController, this);
       wdw.setVisible(true);
 //      model.getCurrentPurchaseTableModel().clear();
     } catch (VerificationFailedException e1) {
@@ -209,7 +209,7 @@ public class PurchaseTab {
   }
 
   // switch UI to the state that allows to initiate new purchase
-  private void endSale() {
+  public void endSale() {
     purchasePane.reset();
 
     cancelPurchase.setEnabled(false);

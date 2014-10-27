@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -34,7 +35,6 @@ public class PurchaseItemPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	// Text field on the dialogPane
-	private JTextField barCodeField;
 	private JComboBox<StockItem> barCodeComboBox;
 	private JTextField quantityField;
 	private JTextField nameField;
@@ -132,10 +132,8 @@ public class PurchaseItemPanel extends JPanel {
 		barCodeComboBox = new JComboBox<StockItem>();
 
 		// add stock items from warehouse model
-		List<StockItem> stockItemList = model.getWarehouseTableModel().getTableRows();
-		for (StockItem stockItem : stockItemList) {
-			barCodeComboBox.addItem(stockItem);
-		}
+		setComboBoxElements();
+		barCodeComboBox.setSelectedItem(null);
 
 		// add action listeners to fill fields with selected item data
 		barCodeComboBox.addActionListener(new ActionListener() {
@@ -168,6 +166,14 @@ public class PurchaseItemPanel extends JPanel {
 
 	}
 
+	private void setComboBoxElements() {
+		List<StockItem> stockItemList = model.getWarehouseTableModel()
+				.getTableRows();
+		for (StockItem stockItem : stockItemList) {
+			barCodeComboBox.addItem(stockItem);
+		}
+	}
+
 	// Fill dialog with data from the "database".
 	public void fillDialogFields() {
 		StockItem stockItem = (StockItem) barCodeComboBox.getSelectedItem();
@@ -181,17 +187,9 @@ public class PurchaseItemPanel extends JPanel {
 		}
 	}
 
-	// Search the warehouse for a StockItem with the bar code entered
-	// to the barCode textfield.
-	private StockItem getStockItemByBarcode() {
-		try {
-			int code = Integer.parseInt(barCodeField.getText());
-			return model.getWarehouseTableModel().getItemById(code);
-		} catch (NumberFormatException ex) {
-			return null;
-		} catch (NoSuchElementException ex) {
-			return null;
-		}
+	// Search the warehouse for a StockItem with the bar code of selected item
+	private StockItem getSelectedStockItem() {
+			return (StockItem) barCodeComboBox.getSelectedItem();
 	}
 
 	/**
@@ -199,7 +197,7 @@ public class PurchaseItemPanel extends JPanel {
 	 */
 	public void addItemEventHandler() {
 		// add chosen item to the shopping cart.
-		StockItem stockItem = getStockItemByBarcode();
+		StockItem stockItem = getSelectedStockItem();
 		if (stockItem != null) {
 			int quantity;
 			try {
@@ -236,11 +234,17 @@ public class PurchaseItemPanel extends JPanel {
 		this.quantityField.setEnabled(enabled);
 	}
 
+	private void refreshBarCodeComboBox() {
+		this.barCodeComboBox.removeAllItems();
+		setComboBoxElements();
+		barCodeComboBox.setSelectedItem(null);
+	}
+
 	/**
 	 * Reset dialog fields.
 	 */
 	public void reset() {
-		barCodeComboBox.setSelectedIndex(0);
+		refreshBarCodeComboBox();
 		quantityField.setText("1");
 		nameField.setText("");
 		priceField.setText("");

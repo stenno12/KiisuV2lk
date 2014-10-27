@@ -29,6 +29,8 @@ public class SaleWindow extends JFrame {
 	
 	private JTextField payField;
 	
+	private PurchaseTab parentTab;
+	
 //	public void actionPerformed(ActionEvent e) {
 //		this.dispose();
 //	}
@@ -36,8 +38,8 @@ public class SaleWindow extends JFrame {
 	private double sum = 0;
 	private static final Logger log = Logger.getLogger(PurchaseTab.class);
 	
-	public SaleWindow(final SalesSystemModel model, final SalesDomainController domainController) {
-	
+	public SaleWindow(final SalesSystemModel model, final SalesDomainController domainController, PurchaseTab purchaseTab) {
+	parentTab = purchaseTab;
 	setSize(300, 300); // 
     setLocation(100, 100); // 
 
@@ -66,9 +68,8 @@ public class SaleWindow extends JFrame {
     			System.out.println("yay");
 				
     			try {
-					domainController.submitCurrentPurchase(
-					          model.getCurrentPurchaseTableModel().getTableRows()
-					      );
+					domainController.submitCurrentPurchase(model.getCurrentPurchaseTableModel().getTableRows());
+					parentTab.endSale();
 				} catch (VerificationFailedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
