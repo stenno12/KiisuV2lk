@@ -162,7 +162,7 @@
 
 		<git command="tag">
 			<args>
-				<arg line="-a ${tag_name} -m ${commit_msg}" />
+				<arg line="-a ${tag_name} -m '${commit_msg}'" />
 			</args>
 		</git>
 
