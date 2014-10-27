@@ -24,6 +24,7 @@ public interface SalesDomainController {
     
     
     public List<HistoryItem> loadHistoryState();
+    public List<SoldItem> loadDetailedHistoryState();
     // business processes
     /**
      * Initiate new business transaction - purchase of the goods.

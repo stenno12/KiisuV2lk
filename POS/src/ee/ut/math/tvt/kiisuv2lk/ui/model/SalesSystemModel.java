@@ -41,14 +41,13 @@ public class SalesSystemModel {
         warehouseTableModel.populateWithData(domainController.loadWarehouseState());
         // populate history model with data from history
         histoyTableModel.populateWithData(domainController.loadHistoryState());
-
+       // historydetailtablemodel.populateWithData(domainController.loadDetailedHistoryState());
     }
     
     public HistoryTableModel getHistorytableModel() {
         return histoyTableModel;
     }
     public HistoryItemDetailTableModel getHistoryItemDetailTableModel() {
-		// TODO Auto-generated method stub
 		return historydetailtablemodel;
 	}
     

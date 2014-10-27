@@ -86,4 +86,10 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		System.out.println("Now elements in history: "+ historydataset.size() );
 	}
 
+	@Override
+	public List<SoldItem> loadDetailedHistoryState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
