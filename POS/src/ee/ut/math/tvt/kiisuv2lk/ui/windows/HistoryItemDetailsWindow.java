@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 
 public class HistoryItemDetailsWindow extends JFrame{
@@ -96,8 +97,14 @@ public class HistoryItemDetailsWindow extends JFrame{
       JTableHeader header = table.getTableHeader();
       header.setReorderingAllowed(false);
 
-      JScrollPane scrollPane = new JScrollPane(table);
-
+     JScrollPane scrollPane = new JScrollPane(table);
+     /*
+      for(int i=0;i<HItem.getAmountOfELements();i++){
+    	  SoldItem soldI=HItem.getSoldItems().get(i);
+    	  //JLabel id
+      }
+      */
+      
       GridBagConstraints gc = new GridBagConstraints();
       GridBagLayout gb = new GridBagLayout();
       gc.fill = GridBagConstraints.BOTH;
@@ -105,7 +112,7 @@ public class HistoryItemDetailsWindow extends JFrame{
       gc.weighty = 1.0;
 
       panel.setLayout(gb);
-      panel.add(scrollPane, gc);
+      //panel.add(scrollPane, gc);
 
       panel.setBorder(BorderFactory.createTitledBorder("Detailed view of the purchase"));
       return panel;

@@ -37,6 +37,7 @@ public class HistoryItemDetailTableModel extends SalesSystemTableModel<HistoryIt
 	
 	@Override
 	protected Object getColumnValue(HistoryItem item, int columnIndex) {
+
 		List<SoldItem> SI=item.getSoldItems();
 		System.out.println(item.getAmountOfELements());
 			if(item.getAmountOfELements()==1){
@@ -55,6 +56,7 @@ public class HistoryItemDetailTableModel extends SalesSystemTableModel<HistoryIt
 				throw new IllegalArgumentException("Column index out of range");
 				}
 			else{
+				
 				return SI;
 			}
 		}
