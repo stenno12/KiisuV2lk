@@ -23,7 +23,7 @@ public interface SalesDomainController {
      */
     public List<StockItem> loadWarehouseState();
     
-    
+    public List<HistoryItem> loadDetailedDeatailHistoryState();
     public List<HistoryItem> loadHistoryState();
     public List<SoldItem> loadDetailedHistoryState();
     // business processes
@@ -46,17 +46,15 @@ public interface SalesDomainController {
      * 
      * @param goods
      *            Goods that the buyer has chosen to buy.
+     * @param model 
      * @throws VerificationFailedException
      */
-    public void submitCurrentPurchase(List<SoldItem> goods)
+    public void submitCurrentPurchase(List<SoldItem> goods, SalesSystemModel model)
             throws VerificationFailedException;
 
 
 
 	public void saveHistoryState(List<SoldItem> tableRows);
-
-
-	public List<HistoryItem> loadDetailedDeatailHistoryState();
 
 
 	

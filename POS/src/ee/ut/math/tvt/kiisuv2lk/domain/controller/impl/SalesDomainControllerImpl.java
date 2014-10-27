@@ -12,6 +12,7 @@ import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 
 
 /**
@@ -22,11 +23,18 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	List<HistoryItem> historydataset = new ArrayList<HistoryItem>();
 	
 	
-	public void submitCurrentPurchase(List<SoldItem> goods) throws VerificationFailedException {
-		// Let's assume we have checked and found out that the buyer is underaged and
-		// cannot buy chupa-chups
-//		throw new VerificationFailedException("Underaged!");
-		// XXX - Save purchase
+	public void submitCurrentPurchase(List<SoldItem> goods,
+			SalesSystemModel model) throws VerificationFailedException {
+		//
+		Date date = new Date();
+        String[] parts = date.toString().split(" ");
+        Long id= (long) historydataset.size();
+		HistoryItem newElem= new HistoryItem(model.getCurrentPurchaseTableModel().getTableRows(), parts[1]+" "+parts[2]+" "+parts[5], parts[3],id);
+		
+		//
+		
+		model.getWarehouseTableModel().removeItems(model.getCurrentPurchaseTableModel().getTableRows());
+		model.getHistorytableModel().addItem(newElem);
 	}
 
 	public void cancelCurrentPurchase() throws VerificationFailedException {				
@@ -108,5 +116,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	public void setHistorydataset(List<HistoryItem> historydataset) {
 		this.historydataset = historydataset;
 	}
+
+
 
 }

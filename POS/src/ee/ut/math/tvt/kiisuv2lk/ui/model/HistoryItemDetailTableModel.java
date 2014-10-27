@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.ui.windows.HistoryItemDetailsWindow;
 
 /**
@@ -37,20 +38,26 @@ public class HistoryItemDetailTableModel extends SalesSystemTableModel<HistoryIt
 	@Override
 	protected Object getColumnValue(HistoryItem item, int columnIndex) {
 		List<SoldItem> SI=item.getSoldItems();
-		//for(int i=0;i<SI.size();i++ ){
-		int i=0;
-			switch (columnIndex) {
-			case 0:
-				return item.getSoldItems();
-			case 1:
-				return SI.get(i).getPrice();
-			case 2:
-				return SI.get(i).getQuantity();
-			case 3:
-				return SI.get(i).getSum();
+		System.out.println(item.getAmountOfELements());
+			if(item.getAmountOfELements()==1){
+				System.out.println(item.getAmountOfELements());
+				StockItem STockI =item.getSTI();
+				switch (columnIndex) {
+				case 0:
+					return STockI.getName();
+				case 1:
+					return STockI.getPrice();
+				case 2:
+					return item.getSoldItems().get(1).getQuantity();
+				case 3:
+					return item.getSoldItems().get(1).getSum();
+				}
+				throw new IllegalArgumentException("Column index out of range");
+				}
+			else{
+				return SI;
 			}
-			throw new IllegalArgumentException("Column index out of range");
-			}
+		}
 		//}
 
 

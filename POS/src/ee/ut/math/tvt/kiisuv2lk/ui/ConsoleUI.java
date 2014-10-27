@@ -115,18 +115,14 @@ public class ConsoleUI {
 			showStock(warehouse);
 		else if (c[0].equals("c"))
 			showStock(cart);
-		else if (c[0].equals("p"))
-			try {
-			    List<SoldItem> soldItems = new ArrayList<SoldItem>();
-			    for(StockItem stockItem : cart) {
-			        soldItems.add(new SoldItem(stockItem, stockItem.getQuantity()));
-			    }
-				dc.submitCurrentPurchase(soldItems);
-				cart.clear();
-			} catch (VerificationFailedException e) {
-				log.error(e.getMessage());
+		else if (c[0].equals("p")) {
+			List<SoldItem> soldItems = new ArrayList<SoldItem>();
+			for(StockItem stockItem : cart) {
+			    soldItems.add(new SoldItem(stockItem, stockItem.getQuantity()));
 			}
-		else if (c[0].equals("r")) 
+			//dc.submitCurrentPurchase(soldItems);
+			cart.clear();
+		} else if (c[0].equals("r")) 
 			try {
 				dc.cancelCurrentPurchase();
 				cart.clear();

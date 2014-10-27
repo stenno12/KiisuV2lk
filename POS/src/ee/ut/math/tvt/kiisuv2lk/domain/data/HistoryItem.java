@@ -10,11 +10,13 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	private String date;
 	private String time;
 	private double sum;
+	private int AmountOfELements;
 	
 	public HistoryItem(List<SoldItem> listsold,
 			String date, String time, Long id) {
 		super();
 		this.STI=listsold.get(0).getStockItem();
+		this.AmountOfELements=listsold.size();
 		this.soldItems = listsold;
 		this.id = id;
 		this.date=date;
@@ -121,6 +123,20 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+
+
+	public int getAmountOfELements() {
+		return AmountOfELements;
+	}
+
+
+
+
+	public void setAmountOfELements(int amountOfELements) {
+		AmountOfELements = amountOfELements;
 	}
 
 

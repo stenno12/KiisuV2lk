@@ -61,7 +61,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 			int removeamount=itemlist.get(i).getQuantity();
 			if(item.getQuantity()>=removeamount){
 				item.setQuantity(item.getQuantity() - removeamount);
-				System.out.println("Eemoved "+ removeamount+" "+ item.getName()+" from warehouse");
+				System.out.println("Removed "+ removeamount+" "+ item.getName()+" from warehouse");
 			}else{
 				System.out.println("Warehouse does not have enough items");
 				done=false;

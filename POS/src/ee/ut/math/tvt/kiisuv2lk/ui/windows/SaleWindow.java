@@ -65,25 +65,15 @@ public class SaleWindow extends JFrame {
     JButton accept = new JButton("accept");
     accept.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
-    		int i=2;
+    		
     		try{
     		if (Double.parseDouble(payField.getText())>= sum){
     			System.out.println("Sale confirmed");
     			try {
-    				//
-    				Date date = new Date();
-    		        String[] parts = date.toString().split(" ");
-    		        Long id= (long) i;
-    				HistoryItem newElem= new HistoryItem(model.getCurrentPurchaseTableModel().getTableRows(), parts[1]+" "+parts[2]+" "+parts[5], parts[3],id);
-    				
-    				//
     				
     				
-					domainController.submitCurrentPurchase(model.getCurrentPurchaseTableModel().getTableRows());
-					model.getWarehouseTableModel().removeItems(model.getCurrentPurchaseTableModel().getTableRows());
+					domainController.submitCurrentPurchase(model.getCurrentPurchaseTableModel().getTableRows(),model);
 					parentTab.endSale();
-					model.getHistorytableModel().addItem(newElem);
-					i++;
 				} catch (VerificationFailedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

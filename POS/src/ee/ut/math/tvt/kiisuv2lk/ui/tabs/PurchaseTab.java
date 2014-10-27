@@ -176,20 +176,14 @@ public class PurchaseTab {
   /** Event handler for the <code>submit purchase</code> event. 
  * @throws VerificationFailedException */
   protected void submitPurchaseButtonClicked() throws VerificationFailedException {
-//    log.info("Sale complete");
-    try {
-      log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
-      domainController.submitCurrentPurchase(
-          model.getCurrentPurchaseTableModel().getTableRows()
-      );
+log.debug("Contents of the current basket:\n" + model.getCurrentPurchaseTableModel());
+      //domainController.submitCurrentPurchase(
+          //model.getCurrentPurchaseTableModel().getTableRows()
+      //);
       
       SaleWindow wdw = new SaleWindow(model, domainController, this);
       wdw.setVisible(true);
 //      model.getCurrentPurchaseTableModel().clear();
-    } catch (VerificationFailedException e1) {
-      log.error(e1.getMessage());
-    }
-//    endSale();
   }
 
 
