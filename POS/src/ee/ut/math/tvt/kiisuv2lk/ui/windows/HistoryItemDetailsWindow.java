@@ -31,13 +31,12 @@ public class HistoryItemDetailsWindow extends JFrame{
 	public HistoryItemDetailsWindow(SalesSystemModel model,HistoryItem HItem) {
 		this.model=model;
 		this.HItem=HItem;
-		setSize(400, 600);
+		setSize(200, 600);
 	    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 	    setLocation((screen.width - 200) / 2, (screen.height - 300) / 2); 
 	    
 	    Container cont = getContentPane();
 	    cont.setLayout(new FlowLayout());
-	    draw();
 	    cont.add(getPane());
 	    
 	    pack();
@@ -55,14 +54,23 @@ public class HistoryItemDetailsWindow extends JFrame{
 	    
 	    OKButton= createOKButton();
 
-	    
-
-	    panel.add(OKButton, gc);		  
-	    
 	    gc.gridx=2;
 	    
-	    panel.add(OKButton, gc);
+	   
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.NORTH;
+        gc.gridwidth = GridBagConstraints.REMAINDER;
+        gc.weightx = 1.0d;
+        gc.weighty = 0d;
+
+
+        gc.weighty = 1.0;
+        gc.fill = GridBagConstraints.BOTH;
+        panel.add(drawHistoryDetailMainPane(), gc);
+        panel.add(OKButton, gc);
 	    return panel;
 	  }
 	protected void OKClicked() {
@@ -78,37 +86,13 @@ public class HistoryItemDetailsWindow extends JFrame{
 	    });
 	    return b;
 	}
-	public Component draw() {
-		System.out.println("MJAUU");
-        JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        GridBagLayout gb = new GridBagLayout();
-        GridBagConstraints gc = new GridBagConstraints();
-        panel.setLayout(gb);
-
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.NORTH;
-        gc.gridwidth = GridBagConstraints.REMAINDER;
-        gc.weightx = 1.0d;
-        gc.weighty = 0d;
-
-
-        gc.weighty = 1.0;
-        gc.fill = GridBagConstraints.BOTH;
-        panel.add(drawHistoryDetailMainPane(), gc);
-        
-        return panel;
-      }
-	// table of the purchase history
+	
+	// table of HistoryItem
     private Component drawHistoryDetailMainPane() {
       JPanel panel = new JPanel();
 
-      //final JTable table = new JTable(model.getHistoryItemDetailTableModel());
-      final JTable table = new JTable(model.getWarehouseTableModel());
-      
+      final JTable table = new JTable(model.getHistoryItemDetailTableModel());
 
-      
       JTableHeader header = table.getTableHeader();
       header.setReorderingAllowed(false);
 
@@ -123,7 +107,7 @@ public class HistoryItemDetailsWindow extends JFrame{
       panel.setLayout(gb);
       panel.add(scrollPane, gc);
 
-      panel.setBorder(BorderFactory.createTitledBorder("Purchase history"));
+      panel.setBorder(BorderFactory.createTitledBorder("Detailed view of the purchase"));
       return panel;
     }
 	   

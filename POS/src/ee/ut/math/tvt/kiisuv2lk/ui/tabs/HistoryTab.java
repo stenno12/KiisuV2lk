@@ -63,9 +63,7 @@ public class HistoryTab {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 long row = table.rowAtPoint(evt.getPoint());
                 if (row >= 0 ) {
-                	System.out.println(row);
                 	HistoryItem HI=model.getHistorytableModel().getItemById(row);
-                	System.out.println(row);
                 	HistoryItemDetailsWindow newWin= new HistoryItemDetailsWindow(model,HI);
         	        newWin.setVisible(true);
 
