@@ -153,27 +153,27 @@
 
 	<!-- Creating a tag and synchronize it with the GitHub -->
 	<target name="git_tag" description="Create and push tag">
-		<input message="Tag name" addproperty="tag" />
-		<input message="Commit message" addproperty="commit" />
-		<input message="Username" addproperty="usernm" />
+		<input message="Tag name" addproperty="tag_name" />
+		<input message="Commit message" addproperty="commit_msg" />
+		<input message="Username" addproperty="username" />
 		<input message="Password" addproperty="passwd" />
 
 		<echo message="Creating tag..." />
 
 		<git command="tag">
 			<args>
-				<arg value="-a ${tag} -m ${commit}" />
+				<arg line="-a ${tag_name} -m ${commit_msg}" />
 			</args>
 		</git>
 
 		<git command="push">
 			<args>
 				<arg value="--tags" />
-				<arg value="https://${usernm}:${passwd}@github.com/stenno12/KiisuV2lk.git" />
+				<arg
+					value="https://${username}:${passwd}@github.com/stenno12/KiisuV2lk.git" />
 			</args>
 		</git>
 
 	</target>
-
 
 </project>
