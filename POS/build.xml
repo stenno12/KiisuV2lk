@@ -3,186 +3,177 @@
 
 	<!-- Definitions of variables used during the rest of this script -->
 
-	<property name="build.dir" value="${basedir}/build"/>
-	<property name="build.classes.dir" value="${build.dir}/classes"/>
-	<property name="build.jar.dir" value="${build.dir}/jar"/>
-	<property name="src.dir" value="${basedir}/src"/>
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="build.jar.dir" value="${build.dir}/jar" />
+	<property name="src.dir" value="${basedir}/src" />
 
 	<propertyfile file="${src.dir}/application.properties" />
-	<propertyfile file= "${src.dir}/version.properties" />
-	<propertyfile file= "${src.dir}/log4j.properties" />
-	
+	<propertyfile file="${src.dir}/version.properties" />
+	<propertyfile file="${src.dir}/log4j.properties" />
+
 
 	<!-- Definitions of classpath variants used for different tasks -->
 
 	<path id="compile.classpath">
-		<pathelement location="${conf.dir}"/>
+		<pathelement location="${conf.dir}" />
 		<fileset dir="lib">
-			<include name="*.jar"/>
+			<include name="*.jar" />
 		</fileset>
 	</path>
 
 	<path id="run.classpath">
-		<pathelement location="${build.classes.dir}"/>
+		<pathelement location="${build.classes.dir}" />
 		<!-- configuration -->
-		<!--  log element vist <pathelement location="${conf.dir}"/>-->
+		<!-- log element vist <pathelement location="${conf.dir}"/> -->
 		<fileset dir="lib">
-			<include name="*.jar"/>
+			<include name="*.jar" />
 		</fileset>
 	</path>
-	
-		<!--class path for jrun-->
-	 <path id="jrun.classpath">
-	  <fileset dir="${build.jar.dir}/">
-	   <include name="kiisuv2lk.jar"/>
-	  </fileset>
-	 </path>
 
-	<!-- Definitions of runnable ant targets.
-         Run them from the command line by executing "ant [targetname]"  -->
+	<!--class path for jrun -->
+	<path id="jrun.classpath">
+		<fileset dir="${build.jar.dir}/">
+			<include name="kiisuv2lk.jar" />
+		</fileset>
+	</path>
+
+	<!-- Definitions of runnable ant targets. Run them from the command line 
+		by executing "ant [targetname]" -->
 
 	<target name="run" depends="build" description="Run the Intro application">
-		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath" fork="yes" />
+		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath"
+			fork="yes" />
 	</target>
-	
+
 	<target name="build" description="Build the system">
-		<mkdir dir="${build.dir}"/>
-		<mkdir dir="${build.classes.dir}"/>
-		<copy file="${src.dir}/application.properties" todir="${build.classes.dir}"/>
-		<copy file="${src.dir}/version.properties" todir="${build.classes.dir}"/> 
-		<copy file="${src.dir}/catflash.jpg" todir="${build.classes.dir}"/>
-		<copy file="${src.dir}/log4j.properties" todir="${build.classes.dir}"/>
-     
-		<javac
-            srcdir="${src.dir}"
-            destdir="${build.classes.dir}"
-            debug="true"
-            debuglevel="lines,vars,source"
-            encoding="utf-8"
-            compiler="modern"
-            target="1.7"
-            source="1.7"
-			includeantruntime="false">
-			<classpath refid="compile.classpath"/>
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<copy file="${src.dir}/application.properties" todir="${build.classes.dir}" />
+		<copy file="${src.dir}/version.properties" todir="${build.classes.dir}" />
+		<copy file="${src.dir}/catflash.jpg" todir="${build.classes.dir}" />
+		<copy file="${src.dir}/log4j.properties" todir="${build.classes.dir}" />
+
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}" debug="true"
+			debuglevel="lines,vars,source" encoding="utf-8" compiler="modern"
+			target="1.7" source="1.7" includeantruntime="false">
+			<classpath refid="compile.classpath" />
 		</javac>
 
 	</target>
-	
+
 	<!-- Clean up build system results -->
 	<target name="clean" description="Clean up build system results">
-		<delete dir="${build.dir}"/>
+		<delete dir="${build.dir}" />
 	</target>
-	
+
 	<!-- Create the jar file -->
 	<target name="dist" depends="build" description="create the jar file">
-		<mkdir dir="${build.jar.dir}"/>
-		
+		<mkdir dir="${build.jar.dir}" />
+
 		<!-- suurenda revision numbrit jar faili loomisel -->
-		<propertyfile file= "${src.dir}/version.properties">
-	    <entry key="build.revision.number" type="int" 
-     	operation="+" 
-     	default="1" />
-	    </propertyfile>
-	    
-		<jar destfile="${build.jar.dir}/kiisuv2lk.jar" basedir="${build.classes.dir}" >
-			
-			<zipgroupfileset dir="lib" includes="*.jar"/>
+		<propertyfile file="${src.dir}/version.properties">
+			<entry key="build.revision.number" type="int" operation="+"
+				default="1" />
+		</propertyfile>
+
+		<jar destfile="${build.jar.dir}/kiisuv2lk.jar" basedir="${build.classes.dir}">
+
+			<zipgroupfileset dir="lib" includes="*.jar" />
 			<manifest>
-			        <attribute name="Main-Class" value="ee.ut.math.tvt.kiisuv2lk.Intro"/>
+				<attribute name="Main-Class" value="ee.ut.math.tvt.kiisuv2lk.Intro" />
 			</manifest>
-			
+
 		</jar>
-		
+
 	</target>
-	
+
 	<!-- Clean up build system results -->
 	<target name="jrun" depends="build" description="run the jar file">
-	    <java classname="ee.ut.math.tvt.kiisuv2lk.Intro" failonerror="true" fork="true">
-	    	<classpath refid="jrun.classpath"/>
-		    <jvmarg value="-Xdebug" />
-	        <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
-		</java> 
-	</target>
-	
-	<target name="runc" depends="build" description="Run the application (console)">
-		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath" fork="yes">
-			<arg value="console" />
-		    <jvmarg value="-Xdebug" />
-	        <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" failonerror="true"
+			fork="true">
+			<classpath refid="jrun.classpath" />
+			<jvmarg value="-Xdebug" />
+			<jvmarg
+				value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 		</java>
 	</target>
-	
+
+	<target name="runc" depends="build" description="Run the application (console)">
+		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath"
+			fork="yes">
+			<arg value="console" />
+			<jvmarg value="-Xdebug" />
+			<jvmarg
+				value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+		</java>
+	</target>
+
 	<!-- macro for git -->
 	<macrodef name="git">
-		<attribute name="command"/>
-		<attribute  name="dir" default=""/>
+		<attribute name="command" />
+		<attribute name="dir" default="" />
 		<element name="args" optional="true" />
 		<sequential>
-				<exec executable="git" dir="@{dir}">
+			<exec executable="git" dir="@{dir}">
 				<arg value="@{command}" />
-				<args/>
+				<args />
 			</exec>
 		</sequential>
 	</macrodef>
-	
+
 	<!-- Commits and pushes changes to GitHub server -->
 	<target name="git_commit" description="Commits and pushes changes to GitHub">
-		<input message="Commit message"
-				addproperty="commit" />
-		<input message="Username"
-				addproperty="usernm" />
-		<input message="Password"
-				addproperty="passwd" />
-		
+		<input message="Commit message" addproperty="message" />
+		<input message="Username" addproperty="username" />
+		<input message="Password" addproperty="passwd" />
+
 		<echo message="Commiting changes..." />
-		
+
 		<git command="add">
 			<args>
-				<arg value="-A"/>
+				<arg value="-A" />
 			</args>
 		</git>
-		
+
 		<git command="commit">
-				<args>
-					<arg value="-m ${commit}"/>
-				</args>
+			<args>
+				<arg value="-m ${message}" />
+			</args>
 		</git>
-		
+
 		<git command="push">
-				<args>
-					<arg value="https://${usernm}:${passwd}@github.com/stenno12/KiisuV2lk.git"/>
-				</args>
+			<args>
+				<arg
+					value="https://${username}:${passwd}@github.com/stenno12/KiisuV2lk.git" />
+			</args>
 		</git>
-		
-		</target>
-	
-	<!--  Creating a tag and synchronize it with the GitHub  -->
+
+	</target>
+
+	<!-- Creating a tag and synchronize it with the GitHub -->
 	<target name="git_tag" description="Create and push tag">
-		<input message="Tag name"
-				addproperty="tag" />
-		<input message="Commit message"
-				addproperty="commit" />
-		<input message="Username"
-				addproperty="usernm" />
-		<input message="Password"
-				addproperty="passwd" />
-		
+		<input message="Tag name" addproperty="tag" />
+		<input message="Commit message" addproperty="commit" />
+		<input message="Username" addproperty="usernm" />
+		<input message="Password" addproperty="passwd" />
+
 		<echo message="Creating tag..." />
-		
+
 		<git command="tag">
 			<args>
-				<arg value="-a ${tag} -m ${commit}"/>
+				<arg value="-a ${tag} -m ${commit}" />
 			</args>
 		</git>
-		
+
 		<git command="push">
-				<args>
-					<arg value="--tags"/>
-					<arg value="https://${usernm}:${passwd}@github.com/stenno12/KiisuV2lk.git"/>
-				</args>
+			<args>
+				<arg value="--tags" />
+				<arg value="https://${usernm}:${passwd}@github.com/stenno12/KiisuV2lk.git" />
+			</args>
 		</git>
-		
-		</target>
-	
+
+	</target>
+
 
 </project>
