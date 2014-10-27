@@ -142,9 +142,9 @@
 			</args>
 		</git>
 		
-		<git command="add">
+		<git command="commit">
 				<args>
-					<arg value="-m ${message}"/>
+					<arg value="-m ${commit}"/>
 				</args>
 		</git>
 		
