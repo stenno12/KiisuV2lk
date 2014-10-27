@@ -99,20 +99,18 @@
 	<target name="jrun" depends="build" description="run the jar file">
 	    <java classname="ee.ut.math.tvt.kiisuv2lk.Intro" failonerror="true" fork="true">
 	    	<classpath refid="jrun.classpath"/>
+		    <jvmarg value="-Xdebug" />
+	        <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 		</java> 
 	</target>
 	
 	<target name="runc" depends="build" description="Run the application (console)">
 		<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath" fork="yes">
 			<arg value="console" />
+		    <jvmarg value="-Xdebug" />
+	        <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 		</java>
 	</target>
-	
-	<java classname="ee.ut.math.tvt.kiisuv2lk.Intro" classpathref="run.classpath" fork="yes">
-	          <jvmarg value="-Xdebug" />
-	          <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
-	        </java>
-	
 	
 	<!-- macro for git -->
 	<macrodef name="git">
