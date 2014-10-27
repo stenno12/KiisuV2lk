@@ -12,7 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
+import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
+import ee.ut.math.tvt.kiisuv2lk.ui.windows.AddToStockWindow;
+import ee.ut.math.tvt.kiisuv2lk.ui.windows.HistoryItemDetailsWindow;
 
 /**
  * Encapsulates everything that has to do with the purchase tab (the tab
@@ -53,8 +56,23 @@ public class HistoryTab {
       private Component drawHistoryMainPane() {
         JPanel panel = new JPanel();
 
-        JTable table = new JTable(model.getHistorytableModel());
+        final JTable table = new JTable(model.getHistorytableModel());
+        
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                long row = table.rowAtPoint(evt.getPoint());
+                if (row >= 0 ) {
+                	System.out.println(row);
+                	HistoryItem HI=model.getHistorytableModel().getItemById(row);
+                	System.out.println(row);
+                	HistoryItemDetailsWindow newWin= new HistoryItemDetailsWindow(model,HI);
+        	        newWin.setVisible(true);
 
+                }
+            }
+        });
+        
         JTableHeader header = table.getTableHeader();
         header.setReorderingAllowed(false);
 

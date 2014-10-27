@@ -4,6 +4,7 @@ import java.util.List;
 
 public class HistoryItem implements Cloneable, DisplayableItem {
     private List<SoldItem> soldItems;
+    private Long id;
     private StockItem STI;
     private double price;
 	private String date;
@@ -11,10 +12,11 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	private double sum;
 	
 	public HistoryItem(List<SoldItem> listsold,
-			String date, String time) {
+			String date, String time, Long id) {
 		super();
 		this.STI=listsold.get(0).getStockItem();
 		this.soldItems = listsold;
+		this.id = id;
 		this.date=date;
 		this.time=time;
 		this.price=STI.getPrice();
@@ -58,7 +60,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Override
 	public Long getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 
 
@@ -112,6 +114,13 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 
 	public void setSum(double sum) {
 		this.sum = sum;
+	}
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 

@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.kiisuv2lk.ui.model;
 
+import javax.swing.table.TableModel;
+
 import org.apache.log4j.Logger;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
@@ -10,7 +12,8 @@ import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
 public class SalesSystemModel {
     
     private static final Logger log = Logger.getLogger(SalesSystemModel.class);
-
+    //historydetailtablemodel
+    private HistoryItemDetailTableModel historydetailtablemodel;
     //History model 
     private HistoryTableModel histoyTableModel;
     
@@ -44,6 +47,10 @@ public class SalesSystemModel {
     public HistoryTableModel getHistorytableModel() {
         return histoyTableModel;
     }
+    public HistoryItemDetailTableModel getHistoryItemDetailTableModel() {
+		// TODO Auto-generated method stub
+		return historydetailtablemodel;
+	}
     
     public StockTableModel getWarehouseTableModel() {
         return warehouseTableModel;
@@ -52,5 +59,7 @@ public class SalesSystemModel {
     public PurchaseInfoTableModel getCurrentPurchaseTableModel() {
         return currentPurchaseTableModel;
     }
+
+	
     
 }

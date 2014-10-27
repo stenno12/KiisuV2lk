@@ -64,11 +64,11 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		List<SoldItem> listsold=new ArrayList<SoldItem>();
 		listsold.add(sold);
 		
-		HistoryItem newElem= new HistoryItem(listsold, "Oct 26 2014","18:58:41");
+		HistoryItem newElem= new HistoryItem(listsold, "Oct 26 2014","18:58:41",(long) 0);
 		historydataset.add(newElem);
 		
 		listsold.add(sold2);
-		HistoryItem newElem2= new HistoryItem(listsold, "Oct 26 2014","18:58:41");
+		HistoryItem newElem2= new HistoryItem(listsold, "Oct 26 2014","18:58:41",(long) 1);
 		
 		historydataset.add(newElem2);
 		return historydataset;
@@ -79,10 +79,11 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 	public void saveHistoryState(List<SoldItem> goods){
         Date date = new Date();
         String[] parts = date.toString().split(" ");
-        
-		HistoryItem newElem= new HistoryItem(goods, parts[1]+" "+parts[2]+" "+parts[5], parts[4]);
+        Long id= (long) historydataset.size();
+		HistoryItem newElem= new HistoryItem(goods, parts[1]+" "+parts[2]+" "+parts[5], parts[4],id);
 		historydataset.add(newElem);
 		
+		System.out.println("Now elements in history: "+ historydataset.size() );
 	}
 
 }

@@ -16,17 +16,19 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 	private static final Logger log = Logger.getLogger(PurchaseInfoTableModel.class);
 	
 	public HistoryTableModel() {
-		super(new String[] {"Date", "Time", "Bill"});
+		super(new String[] {"Id","Date", "Time", "Bill"});
 	}
 
 	@Override
 	protected Object getColumnValue(HistoryItem item, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return item.getDate();
+			return item.getId();
 		case 1:
-			return item.getTime();
+			return item.getDate();
 		case 2:
+			return item.getTime();
+		case 3:
 			return item.getSum();
 		}
 		throw new IllegalArgumentException("Column index out of range");
