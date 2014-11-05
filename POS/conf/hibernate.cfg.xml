@@ -22,10 +22,11 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <mapping package="ee.ut.math.tvt.salessystem.domain.data"/>
+        <mapping package="ee.ut.math.tvt.kiisuv2lk.domain.data"/>
         
-        <mapping class="ee.ut.math.tvt.salessystem.domain.data.SoldItem"/>
-        <mapping class="ee.ut.math.tvt.salessystem.domain.data.StockItem"/>
+        <mapping class="ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem"/>
+        <mapping class="ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem"/>
+        <mapping class="ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem"/>
 
     </session-factory>
 

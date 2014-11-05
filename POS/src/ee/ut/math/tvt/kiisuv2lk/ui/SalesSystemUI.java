@@ -74,7 +74,11 @@ public class SalesSystemUI extends JFrame {
     addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
-        System.exit(0);
+    	  try{
+    		  getController().endSession();
+    	  }catch(Error er){
+    		  System.exit(0);
+   	  }
       }
     });
   }
@@ -87,6 +91,10 @@ public class SalesSystemUI extends JFrame {
     tabbedPane.add("History", historyTab.draw());
 
     getContentPane().add(tabbedPane);
+  }
+  
+  public SalesDomainController getController(){
+	  return domainController;
   }
 
 }

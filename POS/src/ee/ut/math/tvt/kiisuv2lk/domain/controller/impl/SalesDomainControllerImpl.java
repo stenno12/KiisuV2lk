@@ -7,20 +7,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
+
 import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 import ee.ut.math.tvt.kiisuv2lk.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.kiisuv2lk.salessystem.util.HibernateUtil;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 
 
 /**
  * Implementation of the sales domain controller.
  */
+@SuppressWarnings("unchecked")
 public class SalesDomainControllerImpl implements SalesDomainController {
 	// simulatin database for history items
 	List<HistoryItem> historydataset = new ArrayList<HistoryItem>();
+	
+	public Session session = HibernateUtil.currentSession();
 	
 	
 	public void submitCurrentPurchase(List<SoldItem> goods,
@@ -48,18 +54,19 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	public List<StockItem> loadWarehouseState() {
 		// XXX mock implementation
-		List<StockItem> dataset = new ArrayList<StockItem>();
-
-		StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0, 5);
-		StockItem chupaChups = new StockItem(2l, "Chupa-chups", "Sweets", 8.0, 8);
-	    StockItem frankfurters = new StockItem(3l, "Frankfurters", "Beer sauseges", 15.0, 12);
-	    StockItem beer = new StockItem(4l, "Free Beer", "Student's delight", 0.0, 100);
-
-		dataset.add(chips);
-		dataset.add(chupaChups);
-		dataset.add(frankfurters);
-		dataset.add(beer);
+//		List<StockItem> dataset = new ArrayList<StockItem>();
+//
+//		StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0, 5);
+//		StockItem chupaChups = new StockItem(2l, "Chupa-chups", "Sweets", 8.0, 8);
+//	    StockItem frankfurters = new StockItem(3l, "Frankfurters", "Beer sauseges", 15.0, 12);
+//	    StockItem beer = new StockItem(4l, "Free Beer", "Student's delight", 0.0, 100);
+//
+//		dataset.add(chips);
+//		dataset.add(chupaChups);
+//		dataset.add(frankfurters);
+//		dataset.add(beer);
 		
+		List<StockItem> dataset = session.createQuery("from StockItem").list();
 		return dataset;
 	}
 
@@ -79,6 +86,9 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		HistoryItem newElem2= new HistoryItem(listsold, "Oct 26 2014","18:58:41",(long) 1);
 		
 		historydataset.add(newElem2);
+		
+//		List<HistoryItem> dataset = session.createQuery("from HistoryItem").list();
+//		return dataset;
 		return historydataset;
 	}
 	//save historyitem to history database (simulated)
@@ -115,6 +125,10 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	public void setHistorydataset(List<HistoryItem> historydataset) {
 		this.historydataset = historydataset;
+	}
+
+	public void endSession() {
+	    HibernateUtil.closeSession();
 	}
 
 

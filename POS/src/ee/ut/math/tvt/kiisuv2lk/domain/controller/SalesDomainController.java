@@ -56,7 +56,7 @@ public interface SalesDomainController {
 
 	public void saveHistoryState(List<SoldItem> tableRows);
 
-
+	public void endSession();
 	
 
 

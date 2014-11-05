@@ -3,23 +3,24 @@
 
 	<!-- Definitions of variables used during the rest of this script -->
 
-	<property name="build.dir" value="${basedir}/build" />
-	<property name="build.classes.dir" value="${build.dir}/classes" />
-	<property name="build.jar.dir" value="${build.dir}/jar" />
-	<property name="src.dir" value="${basedir}/src" />
+	<property name="build.dir" 			value="${basedir}/build" />
+	<property name="build.classes.dir" 	value="${build.dir}/classes" />
+	<property name="build.jar.dir" 		value="${build.dir}/jar" />
+	<property name="src.dir" 			value="${basedir}/src" />
+    <property name="conf.dir"           value="${basedir}/conf" />
 
 	<propertyfile file="${src.dir}/application.properties" />
 	<propertyfile file="${src.dir}/version.properties" />
 	<propertyfile file="${src.dir}/log4j.properties" />
 	
-	<property name="lib.dir" value="${basedir}/lib"/>
+	<property name="lib.dir" 			value="${basedir}/lib"/>
 
 	<!-- database variables -->
-	<property name="data.dir"	value="${basedir}/data"/>
-	<property name="db.file"	value="${data.dir}/POSdb"/>
-	<property name="db.alias"	value="POS"/>
-	<property name="db.url" 	value="jdbc:hsqldb:hsql://localhost/POS"/>
-	<property name="lib.hibernate.dir"   value="${lib.dir}/hibernate"/>
+	<property name="data.dir"			value="${basedir}/data"/>
+	<property name="db.file"			value="${data.dir}/POSdb"/>
+	<property name="db.alias"			value="POS"/>
+	<property name="db.url" 			value="jdbc:hsqldb:hsql://localhost/POS"/>
+	<property name="lib.hibernate.dir"  value="${lib.dir}/hibernate"/>
 
 
 	<!-- Definitions of classpath variants used for different tasks -->

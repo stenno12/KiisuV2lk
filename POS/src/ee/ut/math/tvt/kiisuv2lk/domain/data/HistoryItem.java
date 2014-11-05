@@ -2,14 +2,43 @@ package ee.ut.math.tvt.kiisuv2lk.domain.data;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="HISTORYITEM")
 public class HistoryItem implements Cloneable, DisplayableItem {
-    private List<SoldItem> soldItems;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+	
+	@OneToMany(mappedBy="historyItem")
+    private List<SoldItem> soldItems;
+	
+	@Transient
     private StockItem STI;
+	
+	@Transient
     private double price;
+	
+	@Transient
 	private String date;
+	
+	@Transient
 	private String time;
+	
+	@Transient
 	private double sum;
+	
+	@Transient
 	private int AmountOfELements;
 	
 	public HistoryItem(List<SoldItem> listsold,
@@ -26,7 +55,9 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		//this.price=soldItem;
 	}
 
-
+	public HistoryItem(){
+		
+	}
 
 
 	public double getPrice() {
