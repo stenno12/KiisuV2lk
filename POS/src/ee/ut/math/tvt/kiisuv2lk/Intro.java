@@ -10,45 +10,73 @@ import ee.ut.math.tvt.kiisuv2lk.ui.ConsoleUI;
 import ee.ut.math.tvt.kiisuv2lk.ui.IntroUi;
 import ee.ut.math.tvt.kiisuv2lk.ui.SalesSystemUI;
 
-
 public class Intro {
+
+    private static final Logger log = Logger.getLogger(Intro.class);
+    private static final String MODE = "console";
+    private static SalesDomainController domainController;
+
+    public static void main(String args[]) {
 	
-	private static final Logger log = Logger.getLogger(Intro.class);
-	private static final String MODE = "console";
-	public static void main(String args[]) {
-		
-		final SalesDomainController domainController = new SalesDomainControllerImpl();
-
-		if (args.length == 1 && args[0].equals(MODE)) {
-			log.debug("Mode: " + MODE);
-
-			ConsoleUI cui = new ConsoleUI(domainController);
-			cui.run();
-		} else {
-			
-			final IntroDomainController introController = new IntroDomainControllerImpl();
-			IntroUi introUI = new IntroUi(introController);
-			introUI.setVisible(true);
-			introUI.setAlwaysOnTop(true);
-
-			final SalesSystemUI ui = new SalesSystemUI(domainController);
-			ui.setVisible(true);
-
-			introUI.setAlwaysOnTop(false);
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			introUI.setVisible(false);
-		}
-		
-//		final IntroDomainController introController = new IntroDomainControllerImpl();
-//		
-//		// Swing UI
-//		final IntroUi ui = new IntroUi(introController);
-//		
-//		ui.setVisible(true);
-//		log.info("Intro window is opened");
+	domainController = new SalesDomainControllerImpl();
+	
+	if (isConsoleMode(args)) {
+	    startConsoleUi();
+	} else {
+	    startGraphicUi();
 	}
+    }
+
+    private static boolean isConsoleMode(String[] args) {
+	return args.length == 1 && args[0].equals(MODE);
+    }
+
+    private static void startConsoleUi() {
+	log.debug("Mode: " + MODE);
+	new ConsoleUI(domainController).run();
+    }
+
+    private static void startGraphicUi() {
+	boolean introRequired = false;
+	if(introRequired ){
+	    startIntro();
+	}
+	startSalesSystemUi();
+    }
+
+    private static void startSalesSystemUi() {
+	SalesSystemUI salesSystemUi = new SalesSystemUI(domainController);
+	salesSystemUi.setVisible(true);
+    }
+
+    private static void startIntro() {
+	Thread introThread = new Thread(){
+	    private IntroUi introUI;
+	    
+	    public void run() {
+		setupIntro();
+		introUI.setVisible(true);
+		introUI.setAlwaysOnTop(false);
+		waitPause();
+		introUI.setVisible(false);
+	    }
+
+	    private void setupIntro() {
+		IntroDomainController introController = new IntroDomainControllerImpl();
+		introUI = new IntroUi(introController);
+		introUI.setVisible(true);
+		introUI.setAlwaysOnTop(true);
+	    }
+
+	    private void waitPause() {
+		try {
+		    Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
+	    }
+	};
+	introThread.start();
+    }
+
 }

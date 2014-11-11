@@ -61,9 +61,9 @@ public class HistoryTab {
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                long row = table.rowAtPoint(evt.getPoint());
+                int row = table.rowAtPoint(evt.getPoint());
                 if (row >= 0 ) {
-                	HistoryItem HI=model.getHistorytableModel().getItemById(row);
+                	HistoryItem HI=model.getHistorytableModel().getTableRows().get(row);
                 	HistoryItemDetailsWindow newWin= new HistoryItemDetailsWindow(model,HI);
         	        newWin.setVisible(true);
 

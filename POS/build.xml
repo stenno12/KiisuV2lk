@@ -53,6 +53,13 @@
 		<fileset dir="${build.jar.dir}/">
 			<include name="kiisuv2lk.jar" />
 		</fileset>
+	    <pathelement location="${conf.dir}"/>
+	    <fileset dir="${lib.dir}">
+	        <include name="*.jar"/>
+	    </fileset>
+	    <fileset dir="${lib.hibernate.dir}">
+	         <include name="*.jar"/>
+	    </fileset>
 	</path>
 
 	<!-- Definitions of runnable ant targets. Run them from the command line 
