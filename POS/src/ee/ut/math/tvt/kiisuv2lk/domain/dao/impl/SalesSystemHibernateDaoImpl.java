@@ -3,6 +3,7 @@ package ee.ut.math.tvt.kiisuv2lk.domain.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import ee.ut.math.tvt.kiisuv2lk.domain.dao.SalesSystemDao;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
@@ -18,7 +19,10 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
      */
     @Override
     public void addStockItem(StockItem stockItem) {
+	Transaction tx = session.getTransaction();
+	tx.begin();
 	session.save(stockItem);
+	tx.commit();
 	session.flush();
     }
     
@@ -34,14 +38,21 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 
     @Override
     public void updateStockItem(StockItem stockItem) {
-	session.update(stockItem);	session.flush();
+	Transaction tx = session.getTransaction();
+	tx.begin();
+	session.update(stockItem);
+	tx.commit();
+	session.flush();
 
     }
 
     @Override
     public void deleteStockItem(Long id) {
+	Transaction tx = session.getTransaction();
+	tx.begin();
 	StockItem item = (StockItem) session.get(StockItem.class, id);
 	session.delete(item);
+	tx.commit();
 	session.flush();
 
     }
@@ -51,7 +62,10 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
      */
     @Override
     public void addSoldItem(SoldItem soldItem) {
+	Transaction tx = session.getTransaction();
+	tx.begin();
 	session.save(soldItem);
+	tx.commit();
 	session.flush();
     }
     
@@ -74,22 +88,32 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 
     @Override
     public void updateSoldItem(SoldItem soldItem) {
+	Transaction tx = session.getTransaction();
+	tx.begin();
 	session.update(soldItem);
+	tx.commit();
 	session.flush();
 
     }
 
     @Override
     public void deleteSoldItem(Long id) {
+	Transaction tx = session.getTransaction();
+	tx.begin();
 	Object item = session.get(SoldItem.class, id);
 	session.delete(item);
+	tx.commit();
 	session.flush();
     }
 
     @Override
     public Long getNextSaleId() {
 	//SALE_ID_SEQ
+	Transaction tx = session.getTransaction();
+	tx.begin();
 	Integer id = (Integer) session.createSQLQuery("select next value for SALE_ID_SEQ from faketable").uniqueResult();
+	tx.commit();
+	session.flush();
 	return id.longValue();
     }
 
