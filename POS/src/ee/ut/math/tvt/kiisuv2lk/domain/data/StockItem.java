@@ -27,8 +27,9 @@ public class StockItem implements Cloneable, DisplayableItem {
 
     @Column(name = "quantity")
     private int quantity;
-    
-    public StockItem(){};
+
+    public StockItem() {
+    };
 
     public StockItem(Long id, String name, String desc, double price) {
 	this.id = id;
@@ -65,57 +66,81 @@ public class StockItem implements Cloneable, DisplayableItem {
 	}
     }
 
-    public Object clone() {
+    public StockItem clone() {
 	StockItem item = new StockItem(getId(), getName(), getDescription(), getPrice(), getQuantity());
 	return item;
     }
-    
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	StockItem other = (StockItem) obj;
+	if (id == null) {
+	    if (other.id != null)
+		return false;
+	} else if (!id.equals(other.id))
+	    return false;
+	return true;
+    }
+
     @Override
     public String toString() {
 	return id + " " + name + " " + description + " " + price;
     }
-    
+
     /*
-     *  GETTERS SETTERS 
-     * 
+     * GETTERS SETTERS
      */
 
     public String getDescription() {
 	return description;
     }
-    
+
     public void setDescription(String description) {
 	this.description = description;
     }
-    
+
     public String getName() {
 	return name;
     }
-    
+
     public void setName(String name) {
 	this.name = name;
     }
-    
+
     public double getPrice() {
 	return price;
     }
-    
+
     public void setPrice(double price) {
 	this.price = price;
     }
-    
+
     public Long getId() {
 	return id;
     }
-    
+
     public void setId(Long id) {
 	this.id = id;
     }
-    
+
     public int getQuantity() {
 	return quantity;
     }
-    
+
     public void setQuantity(int quantity) {
 	this.quantity = quantity;
     }
