@@ -23,9 +23,9 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 	tx.begin();
 	session.save(stockItem);
 	tx.commit();
-	session.flush();
+
     }
-    
+
     @Override
     public StockItem getStockItem(Long id) {
 	return (StockItem) session.get(StockItem.class, id);
@@ -42,7 +42,6 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 	tx.begin();
 	session.update(stockItem);
 	tx.commit();
-	session.flush();
 
     }
 
@@ -53,7 +52,6 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 	StockItem item = (StockItem) session.get(StockItem.class, id);
 	session.delete(item);
 	tx.commit();
-	session.flush();
 
     }
 
@@ -66,9 +64,9 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 	tx.begin();
 	session.save(soldItem);
 	tx.commit();
-	session.flush();
+
     }
-    
+
     @Override
     public void addSoldItemBatch(List<SoldItem> stockItemList) {
 	for (SoldItem soldItem : stockItemList) {
@@ -92,8 +90,6 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 	tx.begin();
 	session.update(soldItem);
 	tx.commit();
-	session.flush();
-
     }
 
     @Override
@@ -103,17 +99,17 @@ public class SalesSystemHibernateDaoImpl implements SalesSystemDao {
 	Object item = session.get(SoldItem.class, id);
 	session.delete(item);
 	tx.commit();
-	session.flush();
+
     }
 
     @Override
     public Long getNextSaleId() {
-	//SALE_ID_SEQ
+	// SALE_ID_SEQ
 	Transaction tx = session.getTransaction();
 	tx.begin();
-	Integer id = (Integer) session.createSQLQuery("select next value for SALE_ID_SEQ from faketable").uniqueResult();
+	Integer id = (Integer) session.createSQLQuery("select next value for SALE_ID_SEQ from faketable")
+		.uniqueResult();
 	tx.commit();
-	session.flush();
 	return id.longValue();
     }
 
