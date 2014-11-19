@@ -67,12 +67,12 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	try {
 	    SoldItem item = getItemById(solditem.getId());
 	    item.setQuantity(item.getQuantity() + solditem.getQuantity());
-	    log.debug("Found existing item " + solditem.getName() + " increased quantity by " + solditem.getQuantity());
+//	    log.debug("Found existing item " + solditem.getName() + " increased quantity by " + solditem.getQuantity());
 	} catch (NoSuchElementException e) {
 	    rows.add(solditem);
-	    log.debug("Added " + solditem.getName() + " quantity of " + solditem.getQuantity());
+//	    log.debug("Added " + solditem.getName() + " quantity of " + solditem.getQuantity());
 	}
 	fireTableDataChanged();
-	System.out.println(toString());
+//	System.out.println(toString());
     }
 }

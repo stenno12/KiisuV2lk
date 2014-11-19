@@ -3,9 +3,8 @@ package ee.ut.math.tvt.kiisuv2lk.ui.model;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.apache.log4j.Logger;
-
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
+import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
 
 /**
  * Stock item table model.
@@ -13,10 +12,23 @@ import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 public class StockTableModel extends SalesSystemTableModel<StockItem> {
     private static final long serialVersionUID = 1L;
 
-    private static final Logger log = Logger.getLogger(StockTableModel.class);
-
     public StockTableModel() {
 	super(new String[] { "Id", "Name", "Price", "Quantity" });
+    }
+    
+    //testimiseks vajalik
+    public void addItem(final StockItem stockItem) throws VerificationFailedException {
+	try {
+	    StockItem item = getItemById(stockItem.getId());
+	    if(item.getName().equals(stockItem.getName()) == false)
+		throw new VerificationFailedException("ID sama, erinev nimi");
+	    item.setQuantity(item.getQuantity() + stockItem.getQuantity());
+	    item.setQuantity(item.getQuantity() + stockItem.getQuantity());
+	}
+	catch (NoSuchElementException e) {
+	    rows.add(stockItem);
+	}
+	fireTableDataChanged();
     }
 
     @Override
