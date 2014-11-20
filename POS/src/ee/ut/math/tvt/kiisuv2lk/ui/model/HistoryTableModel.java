@@ -16,7 +16,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
     }
 
     @Override
-    protected Object getColumnValue(HistoryItem item, int columnIndex) {
+    public Object getColumnValue(HistoryItem item, int columnIndex) {
 	switch (columnIndex) {
 	case 0:
 	    return item.getId();
@@ -29,8 +29,8 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 	}
 	throw new IllegalArgumentException("Column index out of range");
     }
-    
-    public void reload(List<HistoryItem> historyItemList){
+
+    public void reload(List<HistoryItem> historyItemList) {
 	rows.clear();
 	rows.addAll(historyItemList);
 	fireTableDataChanged();
