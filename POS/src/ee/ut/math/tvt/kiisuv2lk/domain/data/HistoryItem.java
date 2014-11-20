@@ -45,4 +45,12 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 
 	return sum;
     }
+
+    public void addSoldItem(SoldItem SI) {
+	HistoryItem HI = this;
+	List<SoldItem> ListOfSoldItems = HI.getSoldItems();
+	ListOfSoldItems.add(SI);
+	HI = new HistoryItem(ListOfSoldItems, date, HI.getId());
+
+    }
 }
