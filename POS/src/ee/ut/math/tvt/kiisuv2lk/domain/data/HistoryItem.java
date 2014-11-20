@@ -36,7 +36,13 @@ public class HistoryItem implements Cloneable, DisplayableItem {
     }
 
     public double getTotalPrice() {
-	return 0.0;
-    }
+	double sum = 0.0;
+	if (getSoldItems().isEmpty() == false) {
+	    for (SoldItem i : soldItems) {
+		sum += i.getSum();
+	    }
+	}
 
+	return sum;
+    }
 }
