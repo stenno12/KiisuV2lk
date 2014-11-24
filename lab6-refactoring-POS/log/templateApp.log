@@ -1,0 +1,15 @@
+2014-11-24 22:21:50,270 [main] DEBUG - Strating SalesSystem with the Swing UI ..
+2014-11-24 22:21:50,713 [main] INFO - 6 items loaded from disk
+2014-11-24 22:21:50,716 [main] INFO - 1 clients loaded from disk
+2014-11-24 22:21:50,728 [main] INFO - 19 Sales loaded from disk
+2014-11-24 22:21:50,983 [main] INFO - SalesSystem started
+2014-11-24 22:21:56,534 [AWT-EventQueue-0] INFO - New sale process started
+2014-11-24 22:21:56,534 [AWT-EventQueue-0] INFO - New purchase started
+2014-11-24 22:21:56,540 [AWT-EventQueue-0] INFO - 1 clients loaded from disk
+2014-11-24 22:21:57,477 [AWT-EventQueue-0] INFO - Client Toomas with ID=1 got selected.
+2014-11-24 22:22:03,662 [AWT-EventQueue-0] INFO - Sale complete
+2014-11-24 22:22:03,662 [AWT-EventQueue-0] DEBUG - Contents of the current basket:
+Id	Name	Price	Quantity	Sum	
+null	Layz krõpsud	10.5	2	21.0	
+
+2014-11-24 22:31:14,118 [AWT-EventQueue-0] INFO - SalesSystem closed
