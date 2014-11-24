@@ -8,7 +8,8 @@
 	<property name="build.jar.dir" 		value="${build.dir}/jar" />
 	<property name="src.dir" 			value="${basedir}/src" />
     <property name="conf.dir"           value="${basedir}/conf" />
-
+	<property name="test.dir"   		value="${basedir}/test"/>
+	
 	<propertyfile file="${src.dir}/application.properties" />
 	<propertyfile file="${src.dir}/version.properties" />
 	<propertyfile file="${src.dir}/log4j.properties" />
@@ -21,10 +22,18 @@
 	<property name="db.alias"			value="POS"/>
 	<property name="db.url" 			value="jdbc:hsqldb:hsql://localhost/POS"/>
 	<property name="lib.hibernate.dir"  value="${lib.dir}/hibernate"/>
-
+	<property name="build.test.dir"       value="${build.dir}/test"/>
 
 	<!-- Definitions of classpath variants used for different tasks -->
-
+	
+	<path id="test-classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	    <pathelement path="${build.classes.dir}/" />
+		<pathelement path="${build.test.dir}/" />
+	</path>
+	
 	<path id="compile.classpath">
 		<pathelement location="${conf.dir}" />
 		<fileset dir="lib">
@@ -53,6 +62,13 @@
 		<fileset dir="${build.jar.dir}/">
 			<include name="kiisuv2lk.jar" />
 		</fileset>
+	    <pathelement location="${conf.dir}"/>
+	    <fileset dir="${lib.dir}">
+	        <include name="*.jar"/>
+	    </fileset>
+	    <fileset dir="${lib.hibernate.dir}">
+	         <include name="*.jar"/>
+	    </fileset>
 	</path>
 
 	<!-- Definitions of runnable ant targets. Run them from the command line 
@@ -213,5 +229,41 @@
 		</git>
 
 	</target>
+	
+	<target name="build-tests" depends="build" description="Build the system">
+	    <mkdir dir="${build.test.dir}" />
+		<javac
+            srcdir="${test.dir}"
+            destdir="${build.test.dir}"
+            debug="true"
+            debuglevel="lines,vars,source"
+            encoding="utf-8"
+            compiler="modern"
+			target="1.7" 
+			source="1.7" 
+			includeantruntime="false"
+        >
+			<classpath refid="compile.classpath" />
+			<classpath>
+				<pathelement path="${build.classes.dir}" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="test" depends="build-tests" description="Run the template application">
+
+		<junit>
+			<classpath refid="test-classpath" />
+
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${build.test.dir}" includes="**/*.class" />
+			</batchtest>
+		</junit>
+
+
+	</target>
+	
+	
 
 </project>

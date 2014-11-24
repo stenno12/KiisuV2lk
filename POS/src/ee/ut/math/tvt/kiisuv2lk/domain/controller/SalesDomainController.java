@@ -6,7 +6,6 @@ import ee.ut.math.tvt.kiisuv2lk.domain.data.HistoryItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.SoldItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.data.StockItem;
 import ee.ut.math.tvt.kiisuv2lk.domain.exception.VerificationFailedException;
-import ee.ut.math.tvt.kiisuv2lk.ui.model.PurchaseInfoTableModel;
 import ee.ut.math.tvt.kiisuv2lk.ui.model.SalesSystemModel;
 
 /**
@@ -22,10 +21,13 @@ public interface SalesDomainController {
      *         ee.ut.math.tvt.salessystem.domain.data.StockItem}s.
      */
     public List<StockItem> loadWarehouseState();
-    
+
     public List<HistoryItem> loadDetailedDeatailHistoryState();
+
     public List<HistoryItem> loadHistoryState();
+
     public List<SoldItem> loadDetailedHistoryState();
+
     // business processes
     /**
      * Initiate new business transaction - purchase of the goods.
@@ -46,19 +48,15 @@ public interface SalesDomainController {
      * 
      * @param goods
      *            Goods that the buyer has chosen to buy.
-     * @param model 
+     * @param model
      * @throws VerificationFailedException
      */
-    public void submitCurrentPurchase(List<SoldItem> goods, SalesSystemModel model)
-            throws VerificationFailedException;
+    public void submitCurrentPurchase(List<SoldItem> goods, SalesSystemModel model) throws VerificationFailedException;
 
+    public void saveHistoryState(List<SoldItem> tableRows);
 
+    public void endSession();
 
-	public void saveHistoryState(List<SoldItem> tableRows);
+    public void addStockItem(StockItem newItem);
 
-	public void endSession();
-	
-
-
-    
 }
